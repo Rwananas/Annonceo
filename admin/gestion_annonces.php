@@ -77,33 +77,27 @@ if (isset($_GET['action'])) {
         if (!isset($_POST['code_postal']) || !preg_match('#^[0-9]{5}$#', $_POST['code_postal'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format code postal !</div>';
         }
-
+        // CATEGORIE
         if (!isset($_POST['categorie_id'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format categorie !</div>';
         }
 
         // TRAITEMENT POUR PHOTO
-        // initialisation de la variable à vide
         $photo_bdd = "";
-
         // Condition pour modifier une photo
         if ($_GET['action'] == 'update') {
             // A mettre en relation avec la nouvelle photo que l'on veut insérer en BDD pour remplacer la photo
             $photo_bdd = $_POST['photoActuelle'];
         }
 
-        if (!empty($_FILES['photo']['name'])) {
-            // Je donne un nom à la photo que je vais ajouter en concaténant le nom de la référence du Annonce, avec le nom du fichier photo d'origine ( les deux étant séparés d'un underscore)
-            $photo_nom = $_POST['titre'] . '_' . $_FILES['photo']['name'];
-            // Utilisation de la variable photo_bdd pour lui affecter la valeur de photo_nom, sous forme de chaine de caractères (pour les bindValue)
-            $photo_bdd = "$photo_nom";
-            // Déclaration d'une variable qui va enregistrer le chemin ou uploader notre fichier (les photos vont aller dans le dossier img de notre projet, en local comme en ligne lorsque le site sera hébergé)
-            $photo_dossier = RACINE_SITE . "img/$photo_nom";
-            // Processus d'envoi de fichier vers le dossier img, en passant par la fonction prédéfinie copy qui va donner un nom temporaire au fichier, avant de l'uploader dans le dossier img avec son nom définitif ($photo_nom)
+        if (!empty($_FILES['photo']['name'])) {            
+            $photo_nom = $_POST['titre'] . '_' . $_FILES['photo']['name'];            
+            $photo_bdd = "$photo_nom";            
+            $photo_dossier = RACINE_SITE . "img/$photo_nom";           
             copy($_FILES['photo']['tmp_name'], $photo_dossier);
         }
 
-        // fin traitement pour la photo
+        // FIN TRAITEMENT PHOTO
 
         if (empty($erreur)) {
             if ($_GET['action'] == 'update') {

@@ -52,7 +52,7 @@ if ($_POST) {
     if (!isset($_POST['code_postal']) || !preg_match('#^[0-9]{5}$#', $_POST['code_postal'])) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format code postal !</div>';
     }
-    // CATEGRIE
+    // CATEGORIE
     if (!isset($_POST['categorie_id'])) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format categorie !</div>';
     }

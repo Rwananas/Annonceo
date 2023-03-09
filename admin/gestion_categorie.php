@@ -36,7 +36,7 @@ $nombresPages = ceil($nombreCategories / $parPage);
 $premierCategorie = ($pageCourante - 1) * $parPage;
 
 
-// Fin pagination
+// FIN PAGINATION
 
 if (isset($_GET['action'])) {
     if ($_POST) {
