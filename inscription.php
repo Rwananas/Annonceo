@@ -4,11 +4,11 @@ require_once('include/init.php');
 $pageTitle = "Inscription";
 
 // redirection de l'internaute déjà connecté, il n'a rien a faire sur une page incription (on le redirige vers sa page profil grace à header(location))
-if(!internauteConnecte()){
-    header('location:' . URL . 'profil.php');
-} else {
-    header('location:' . URL . 'profil.php');
-}
+// if(!internauteConnecte()){
+//     header('location:' . URL . 'inscription.php');
+// } else {
+//     header('location:' . URL . 'profil.php');
+// }
 
 // tout le controle des inputs et la procédure d'envoi de données en BDD devra etre codé dans cette condition
 if($_POST && !isset($_POST['connexion'])){

@@ -52,34 +52,69 @@ if ($_POST) {
     if (!isset($_POST['code_postal']) || !preg_match('#^[0-9]{5}$#', $_POST['code_postal'])) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format code postal !</div>';
     }
-
+    // CATEGRIE
     if (!isset($_POST['categorie_id'])) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format categorie !</div>';
     }
 
     // TRAITEMENT POUR PHOTO
-    // initialisation de la variable à vide
     $photo_bdd = "";
-
     // Condition pour modifier une photo
-
-
     if (!empty($_FILES['photo']['name'])) {
-
         $photo_nom = uniqid() . '_' . $_FILES['photo']['name'];
-
         $photo_bdd = "$photo_nom";
-
         $photo_dossier = RACINE_SITE . "img/$photo_nom";
-
         copy($_FILES['photo']['tmp_name'], $photo_dossier);
     }
+    $photo_bdd1 = "";
+    $photo_bdd2 = "";
+    $photo_bdd3 = "";
+    $photo_bdd4 = "";
+    $photo_bdd5 = "";
 
-    // fin traitement pour la photo
+    if (!empty($_FILES['photo1']['name'])) {
+        $photo_nom = $_POST['titre'] . '_' . $_FILES['photo1']['name'];
+        $photo_bdd1 = "$photo_nom";
+        $photo_dossier = RACINE_SITE . "img/$photo_nom";
+        copy($_FILES['photo1']['tmp_name'], $photo_dossier);
+    }
+    if (!empty($_FILES['photo2']['name'])) {
+        $photo_nom = $_POST['titre'] . '_' . $_FILES['photo2']['name'];
+        $photo_bdd2 = "$photo_nom";
+        $photo_dossier = RACINE_SITE . "img/$photo_nom";
+        copy($_FILES['photo2']['tmp_name'], $photo_dossier);
+    }
+    if (!empty($_FILES['photo3']['name'])) {
+        $photo_nom = $_POST['titre'] . '_' . $_FILES['photo3']['name'];
+        $photo_bdd3 = "$photo_nom";
+        $photo_dossier = RACINE_SITE . "img/$photo_nom";
+        copy($_FILES['photo3']['tmp_name'], $photo_dossier);
+    }
+    if (!empty($_FILES['photo4']['name'])) {
+        $photo_nom = $_POST['titre'] . '_' . $_FILES['photo4']['name'];
+        $photo_bdd4 = "$photo_nom";
+        $photo_dossier = RACINE_SITE . "img/$photo_nom";
+        copy($_FILES['photo4']['tmp_name'], $photo_dossier);
+    }
+    if (!empty($_FILES['photo5']['name'])) {
+        $photo_nom = $_POST['titre'] . '_' . $_FILES['photo5']['name'];
+        $photo_bdd5 = "$photo_nom";
+        $photo_dossier = RACINE_SITE . "img/$photo_nom";
+        copy($_FILES['photo5']['tmp_name'], $photo_dossier);
+    }
+    // FIN TRAITEMENT PHOTO
 
     if (empty($erreur)) {
 
+        $addPhoto = $pdo->prepare("INSERT INTO photo (photo1, photo2, photo3, photo4, photo5) VALUES (:photo1, :photo2, :photo3, :photo4, :photo5)");
+        $addPhoto->bindValue(':photo1', $photo_bdd1, PDO::PARAM_STR);
+        $addPhoto->bindValue(':photo2', $photo_bdd2, PDO::PARAM_STR);
+        $addPhoto->bindValue(':photo3', $photo_bdd3, PDO::PARAM_STR);
+        $addPhoto->bindValue(':photo4', $photo_bdd4, PDO::PARAM_STR);
+        $addPhoto->bindValue(':photo5', $photo_bdd5, PDO::PARAM_STR);
+        $addPhoto->execute();
 
+        $photo_id = $pdo->lastInsertId();
         // Pour personnaliser le message de réussite, je dois récupérer le TITRE de l'ANNONCE modifiée en BDD, pour perso le message
         // $selectAnnonce = $pdo->query(" SELECT titre FROM Annonce WHERE id_annonce = '$_GET[id_annonce]' ");
         // $Annonce = $selectAnnonce->fetch(PDO::FETCH_ASSOC);
@@ -111,14 +146,14 @@ if ($_POST) {
 }
 
 require_once('include/header.php');
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($_POST);
+// echo '</pre>';
 ?>
 <div class="container">
     <h2 class="text-center my-5">Déposez une annonce</h2>
 
-
+    <?php if(internauteConnecte()) : ?>
     <form id="monForm" class="my-5" method="POST" action="" enctype="multipart/form-data">
 
         <input type="hidden" name="id_annonce" value="<?= $id_annonce ?>">
@@ -156,7 +191,7 @@ echo '</pre>';
                 <label class="form-label" for="description_longue">
                     <div class="badge badge-dark text-wrap">Description longue</div>
                 </label>
-                <textarea class="form-control" name="description_longue" id="description_longue" placeholder="Description détaillée" rows="5"><?=$description_longue?></textarea>
+                <textarea class="form-control" name="description_longue" id="description_longue" placeholder="Description détaillée" rows="5"><?= $description_longue ?></textarea>
             </div>
         </div>
 
@@ -222,11 +257,13 @@ echo '</pre>';
         </div>
 
     </form>
-
-
-    <div class="col-12">
-        <p>Veuillez vous connecter pour déposer une annonce</p>
+    <?php else : ?>
+    <div class="row">
+        <div class="col-12">
+            <p>Veuillez vous connecter pour déposer une annonce</p>
+        </div>
     </div>
+    <?php endif; ?>
 </div>
 
 <?php require_once('include/footer.php'); ?>
