@@ -8,33 +8,18 @@ if (!internauteConnecteAdmin()) {
 
 // PAGINATION GESTION CATEGORIES
 
-
-// Si un indice page existe dans l'URL et qu'on trouve une valeur dedans 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
-    // Alors on déclare une variable $pageCourante à laquelle on va affecter la valeur véhiculée par l'indice page dans l'URL
-    // Protection de ce qui sera véhiculé dans l'URL avec strip_tags ou htmlspecialchars, plus on force le typage de l'information dans l'URL avec (int) pour indiquer qu'on ne veut pas recevoir autre chose qu'un nombre entier
+    
     $pageCourante = (int) strip_tags($_GET['page']);
-} else {
-    // Dans le cas ou aucune information n'a transité dans l'URL, $pageCourante prendra la valeur par défaut de 1 (première page)
-    $pageCourante = 1;
+} else {    
+    $pageCourante = 10;
 }
-
-// Je dois connaitre le nombre de categories en BDD pour établir mon système de pagination
-// Je connais déjà ce nombre (voir en haut) avec rowCount. La syntaxe qui va suivre est plus longue et compliqué mais elle sera plus rapide à l'éxécution que rowCount
 $queryCategories = $pdo->query(" SELECT COUNT(id_categorie) AS nombreCategories FROM categorie ");
-// Le fetch après le query pour récupérer le nombre (pas besoin de fetch_assoc, je ne vais cibler aucune colonne, je veux récupérer un nombre total)
-$resultatcategories = $queryCategories->fetch();
-$nombreCategories = (int) $resultatcategories['nombreCategories'];
-// echo debug($nombreCategories);
-
-// Je veux que sur chaque page, ne s'affiche dans le tableau que 10 categories
+$resultatCategories = $queryCategories->fetch();
+$nombreCategories = (int) $resultatCategories['nombreCategories'];
 $parPage = 10;
-// Calcul pour savoir combien de pages devront être générées ( nombre évolutif)
-// Utilisation de ceil(), fonction prédéfinie qui arrondi à l'unité supérieur si le résultat de la division est un chiffre à virgule
 $nombresPages = ceil($nombreCategories / $parPage);
-// Définir le 1er categorie qui va s'afficher à chaque nouvelle pagge ( on va le cibler grace à l'indice qu'il occupe dans le tableau)
 $premierCategorie = ($pageCourante - 1) * $parPage;
-
 
 // FIN PAGINATION
 
@@ -49,14 +34,14 @@ if (isset($_GET['action'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format titre !</div>';
         }
         // MOTS CLES
-        if (!isset($_POST['motscles']) || iconv_strlen($_POST['motscles']) < 3 || iconv_strlen($_POST['motscles']) > 20) {
+        if (!isset($_POST['motscles']) || iconv_strlen($_POST['motscles']) < 3 || iconv_strlen($_POST['motscles']) > 300) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format motscles !</div>';
         }
 
         if (empty($erreur)) {
             if ($_GET['action'] == 'update') {
                 $modifCategorie =  $pdo->prepare(" UPDATE categorie SET id_categorie = :id_categorie, titre = :titre, motscles = :motscles WHERE id_categorie = :id_categorie");
-                $modifCategorie->bindValue(':id_categorie', $_POST['id_categorie'], PDO::PARAM_INT);
+                $modifCategorie->bindValue(':id_categorie', $_POST['id_categorie'], PDO::PARAM_STR);
                 $modifCategorie->bindValue(':titre', $_POST['titre'], PDO::PARAM_STR);
                 $modifCategorie->bindValue(':motscles', $_POST['motscles'], PDO::PARAM_STR);
                 
@@ -73,8 +58,8 @@ if (isset($_GET['action'])) {
     }
 
     $id_categorie = (isset($currentCategorie['id_categorie'])) ? $currentCategorie['id_categorie'] : "";
-    $categorie = (isset($currentCategorie['categorie'])) ? $currentCategorie['categorie'] : "";
-    
+    $titre = (isset($currentCategorie['titre'])) ? $currentCategorie['titre'] : "";
+    $motscles = (isset($currentCategorie['motscles'])) ? $currentCategorie['motscles'] : "";
 
 
     // SUPPRESSION CATEGORIE
@@ -122,22 +107,22 @@ require_once('includeAdmin/header.php');
 
         <div class="row mt-5">
             <div class="col-md-4">
-                <label class="form-label" for="titre">
+                <label class="form-label" for="categorie">
                     <div class="badge badge-dark text-wrap">Categorie</div>
                 </label>
-                <input class="form-control" type="text" name="categorie" id="categorie" placeholder="categorie" value="<?= $categorie ?>">
+                <input class="form-control" type="text" name="categorie" id="categorie" placeholder="categorie" value="<?= $id_categorie ?>">
             </div>
             <div class="col-md-4">
                 <label class="form-label" for="titre">
                     <div class="badge badge-dark text-wrap">Titre</div>
                 </label>
-                <input class="form-control" type="text" name="categorie" id="categorie" placeholder="titre" value="<?= $categorie ?>">
+                <input class="form-control" type="text" name="titre" id="titre" placeholder="titre" value="<?= $titre ?>">
             </div>
             <div class="col-md-4">
-                <label class="form-label" for="titre">
+                <label class="form-label" for="motscles">
                     <div class="badge badge-dark text-wrap">Mots clés</div>
                 </label>
-                <input class="form-control" type="text" name="categorie" id="categorie" placeholder="mots clés" value="<?= $categorie ?>">
+                <input class="form-control" type="text" name="motscles" id="motscles" placeholder="mots clés" value="<?= $motscles ?>">
             </div>
         </div>
         
@@ -197,22 +182,22 @@ require_once('includeAdmin/header.php');
 <!-- TABLEAU -->
 <table class="table table-dark text-center table-responsive">
     <!-- Requête complétée pour n'afficher que 10 categories dans le tableau, le OFFSET détermine quel categorie sera affiché en premier dans la nouvelle page -->
-    <?php $affichecategories = $pdo->query("SELECT * FROM categorie ORDER BY titre ASC LIMIT $parPage OFFSET $premierCategorie "); ?>
+    <?php $afficheCategories = $pdo->query("SELECT * FROM categorie"); ?>
     <thead>
         <tr>
-            <?php for ($i = 0; $i < $affichecategories->columnCount(); $i++) : $colonne = $affichecategories->getColumnMeta(($i)) ?>
+            <?php for ($i = 0; $i < $afficheCategories->columnCount(); $i++) : $colonne = $afficheCategories->getColumnMeta(($i)) ?>
                 <th><?= $colonne['name'] ?></th>
             <?php endfor; ?>
             <th colspan=2>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php while ($categorie = $affichecategories->fetch(PDO::FETCH_ASSOC)) : ?>
+        <?php while ($categorie = $afficheCategories->fetch(PDO::FETCH_ASSOC)) : ?>
             <tr>
                 <?php foreach ($categorie as $key => $value) : ?>
-                    <?php if ($key == 'categorie') : ?>
-                        <td><?= $value ?> €</td>
-                    <?php endif; ?>
+                    
+                        <td><?= $value ?></td>
+                    
                 <?php endforeach; ?>
                 <td><a href='?action=update&id_categorie=<?= $categorie['id_categorie'] ?>'><i class="bi bi-pen-fill text-warning"></i></a></td>
                 <td><a data-href='?action=delete&id_categorie=<?= $categorie['id_categorie'] ?>' data-toggle="modal" data-target="#confirm-delete"><i class="bi bi-trash-fill text-danger" style="font-size: 1.5rem;"></i></a></td>

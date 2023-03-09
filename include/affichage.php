@@ -9,9 +9,9 @@ if(isset($_GET['categorie'])){
     
     // fin pagination pour les categories
 
-    // affichage de tous les annonces concernés par une categorie
-    $afficheannonces = $pdo->query(" SELECT * FROM annonce WHERE categorie_id = '$_GET[categorie]' ORDER BY prix ASC ");
-    // fin affichage des annonces par categorie
+    // affichage de tous les Annonces concernés par une categorie
+    $afficheAnnonces = $pdo->query(" SELECT * FROM Annonce WHERE categorie_id = '$_GET[categorie]' ORDER BY prix ASC ");
+    // fin affichage des Annonces par categorie
 
     // affichage de la categorie dans le <h2>
     $afficheTitreCategorie = $pdo->query(" SELECT titre FROM categorie WHERE id_categorie = '$_GET[categorie]' ");
@@ -28,17 +28,17 @@ if(isset($_GET['categorie'])){
 
 // tout l'affichage par public
 if(isset($_GET['public'])){
-    // pagination annonces par public
+    // pagination Annonces par public
     
-    // fin pagination annonces par public
+    // fin pagination Annonces par public
 
-    // affichage des annonces par public
-    // requete qui va cibler tous les annonces qui ont en commun le public récupéré dans l'URL
-    $afficheannonces = $pdo->query(" SELECT * FROM annonce WHERE public = '$_GET[public]' ORDER BY prix ASC ");
-    // fin affichage des annonces par public
+    // affichage des Annonces par public
+    // requete qui va cibler tous les Annonces qui ont en commun le public récupéré dans l'URL
+    $afficheAnnonces = $pdo->query(" SELECT * FROM Annonce WHERE public = '$_GET[public]' ORDER BY prix ASC ");
+    // fin affichage des Annonces par public
 
     // affichage du public dans le <h2>
-    $afficheTitrePublic = $pdo->query(" SELECT public FROM annonce WHERE public = '$_GET[public]' ");
+    $afficheTitrePublic = $pdo->query(" SELECT public FROM Annonce WHERE public = '$_GET[public]' ");
     $titrePublic = $afficheTitrePublic->fetch(PDO::FETCH_ASSOC);
     // fin du </h2> pour le public
 
@@ -49,22 +49,22 @@ if(isset($_GET['public'])){
 // fin affichage par public
 
 // ---------------------------------------------------------------------------------------
-// Tout ce qui concerne la fiche annonce
+// Tout ce qui concerne la fiche Annonce
 
-// affichage d'un annonce
-if(isset($_GET['id_annonce'])){
-    $detailannonce = $pdo->query(" SELECT * FROM annonce WHERE id_annonce = '$_GET[id_annonce]' ");
-    // pour se protéger de qlq'un qui tenterait de modifier l'id-annonce dans l'URL...si la valeur n'existe pas en BDD, on le redirige vers notre index (URL). Le <= 0 est fait dans le cas ou il injecte une valeur négative
-    if($detailannonce->rowCount() <= 0){
+// affichage d'un Annonce
+if(isset($_GET['id_Annonce'])){
+    $detailAnnonce = $pdo->query(" SELECT * FROM Annonce WHERE id_Annonce = '$_GET[id_Annonce]' ");
+    // pour se protéger de qlq'un qui tenterait de modifier l'id-Annonce dans l'URL...si la valeur n'existe pas en BDD, on le redirige vers notre index (URL). Le <= 0 est fait dans le cas ou il injecte une valeur négative
+    if($detailAnnonce->rowCount() <= 0){
         header('location:' . URL);
         exit;
     }
-    // si on n'est pas rentré dans la condition, si le annonce existe, on fait le fetch, et le resultat de la requete sera affecté dans la variable/tableau $detail
-    $detail = $detailannonce->fetch(PDO::FETCH_ASSOC);
+    // si on n'est pas rentré dans la condition, si le Annonce existe, on fait le fetch, et le resultat de la requete sera affecté dans la variable/tableau $detail
+    $detail = $detailAnnonce->fetch(PDO::FETCH_ASSOC);
 }
-// fin affichage d'un seul annonce
+// fin affichage d'un seul Annonce
 
 
-//  fin fiche annonce
+//  fin fiche Annonce
 
 // --------------------------------------------------------------------------------------------

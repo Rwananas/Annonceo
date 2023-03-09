@@ -6,40 +6,23 @@ if (!internauteConnecteAdmin()) {
     exit();
 }
 
-// PAGINATION Annonces
-
-
-
+// PAGINATION GESTION ANNONCES
 
 
 // Si un indice page existe dans l'URL et qu'on trouve une valeur dedans 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
-    // Alors on déclare une variable $pageCourante à laquelle on va affecter la valuer véhiculée par l'indice page dans l'URL
-    // Protection de ce qui sera véhiculé dans l'URL avec strip_tags ou htmlspecialchars, plus on force le typage de l'information dans l'URL avec (int) pour indiquer qu'on ne veut pas recevoir autre chose qu'un nombre entier
     $pageCourante = (int) strip_tags($_GET['page']);
 } else {
-    // Dans le cas ou aucune information n'a transité dans l'URL, $pageCourante prendra la valeur par défaut de 1 (première page)
     $pageCourante = 1;
 }
-
-// Je dois connaitre le nombre de Annonces en BDD pour établir mon système de pagination
-// Je connais déjà ce nombre (voir en haut) avec rowCount. La syntaxe qui va suivre est plus longue et compliqué mais elle sera plus rapide à l'éxécution que rowCount
 $queryAnnonces = $pdo->query(" SELECT COUNT(id_annonce) AS nombreAnnonces FROM Annonce ");
-// Le fetch après le query pour récupérer le nombre (pas besoin de fetch_assoc, je ne vais cibler aucune colonne, je veux récupérer un nombre total)
 $resultatAnnonces = $queryAnnonces->fetch();
 $nombreAnnonces = (int) $resultatAnnonces['nombreAnnonces'];
-// echo debug($nombreAnnonces);
-
-// Je veux que sur chaque page, ne s'affiche dans le tableau que 10 Annonces
 $parPage = 10;
-// Calcul pour savoir combien de pages devront être générées ( nombre évolutif)
-// Utilisation de ceil(), fonction prédéfinie qui arrondi à l'unité supérieur si le résultat de la division est un chiffre à virgule
 $nombresPages = ceil($nombreAnnonces / $parPage);
-// Définir le 1er Annonce qui va s'afficher à chaque nouvelle pagge ( on va le cibler grace à l'indice qu'il occupe dans le tableau)
 $premierAnnonce = ($pageCourante - 1) * $parPage;
 
-
-// Fin pagination
+// FIN PAGINATION GESTION ANNONCES
 
 $listeCategories = $pdo->query("SELECT * FROM categorie ORDER BY titre");
 
@@ -50,11 +33,11 @@ if (isset($_GET['action'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format titre !</div>';
         }
         // DESCRIPTION COURTE
-        if (!isset($_POST['description_courte']) || iconv_strlen($_POST['description_courte']) < 3 || iconv_strlen($_POST['description_courte']) > 20) {
+        if (!isset($_POST['description_courte']) || iconv_strlen($_POST['description_courte']) < 3 || iconv_strlen($_POST['description_courte']) > 100) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format description_courte !</div>';
         }
         // DESCRIPTION LONGUE
-        if (!isset($_POST['description_longue']) || iconv_strlen($_POST['description_longue']) < 3 || iconv_strlen($_POST['description_longue']) > 120) {
+        if (!isset($_POST['description_longue']) || iconv_strlen($_POST['description_longue']) < 3 || iconv_strlen($_POST['description_longue']) > 500) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format description_longue !</div>';
         }
         // PRIX
@@ -101,7 +84,7 @@ if (isset($_GET['action'])) {
 
         if (empty($erreur)) {
             if ($_GET['action'] == 'update') {
-                $modifAnnonce =  $pdo->prepare(" UPDATE Annonce SET id_annonce = :id_annonce, titre = :titre, description_courte = :description_courte, description_longue = :description_longue, prix = :prix, pays = :pays, ville = :ville, adresse = :adresse, photo = :photo  WHERE id_annonce = :id_annonce");
+                $modifAnnonce =  $pdo->prepare(" UPDATE Annonce SET id_annonce = :id_annonce, titre = :titre, description_courte = :description_courte, description_longue = :description_longue, prix = :prix, pays = :pays, ville = :ville, code_postal = :code_postal, adresse = :adresse, photo = :photo  WHERE id_annonce = :id_annonce");
                 $modifAnnonce->bindValue(':id_annonce', $_POST['id_annonce'], PDO::PARAM_STR);
                 $modifAnnonce->bindValue(':titre', $_POST['titre'], PDO::PARAM_STR);
                 $modifAnnonce->bindValue(':description_courte', $_POST['description_courte'], PDO::PARAM_STR);
