@@ -1,8 +1,9 @@
 </div>
 
 <footer class="pt-5">
-
-<h3 class="text-center mt-5"><div class="badge badge-dark text-wrap p-3">&copy; ANNONCEO 2023</div></h3>
+<div class="card-footer text-muted">  
+  <h3 class="text-center mt-1"><div class="badge badge-dark text-wrap p-3">&copy; ANNONCEO 2023</div></h3>
+</div>
 
 </footer>
 

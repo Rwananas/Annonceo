@@ -25,15 +25,15 @@ if ($_POST) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format titre !</div>';
     }
     // DESCRIPTION COURTE
-    if (!isset($_POST['description_courte']) || iconv_strlen($_POST['description_courte']) < 3 || iconv_strlen($_POST['description_courte']) > 20) {
+    if (!isset($_POST['description_courte']) || iconv_strlen($_POST['description_courte']) < 3 || iconv_strlen($_POST['description_courte']) > 120) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format description_courte !</div>';
     }
     // DESCRIPTION LONGUE
-    if (!isset($_POST['description_longue']) || iconv_strlen($_POST['description_longue']) < 3 || iconv_strlen($_POST['description_longue']) > 120) {
+    if (!isset($_POST['description_longue']) || iconv_strlen($_POST['description_longue']) < 3 || iconv_strlen($_POST['description_longue']) > 500) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format description_longue !</div>';
     }
     // PRIX
-    if (!isset($_POST['prix']) || !preg_match('#^[0-9]{1,4}$#', $_POST['prix'])) {
+    if (!isset($_POST['prix']) || !preg_match('#^[0-9]{1,6}$#', $_POST['prix'])) {
         $erreur .= '<div class="alert alert-danger" role="alert">Erreur format prix !</div>';
     }
     // PAYS
@@ -142,6 +142,15 @@ if ($_POST) {
         // NOW() POUR DATE D'ENREGISTREMENT
 
         $addAnnonce->execute();
+
+        // $selectAnnonce = $pdo->query(" SELECT titre FROM Annonce WHERE membre_id = '$_GET[membre_id]' ");
+        // $Annonce = $selectAnnonce->fetch(PDO::FETCH_ASSOC);
+        $content .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                    <strong>Félicitations !</strong> Votre Annonce est publiée avec succès !
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
     }
 }
 
@@ -152,117 +161,119 @@ require_once('include/header.php');
 ?>
 <div class="container">
     <h2 class="text-center my-5">Déposez une annonce</h2>
+    <?= $erreur ?>
+    <?= $content ?>
 
-    <?php if(internauteConnecte()) : ?>
-    <form id="monForm" class="my-5" method="POST" action="" enctype="multipart/form-data">
+    <?php if (internauteConnecte()) : ?>
+        <form id="monForm" class="my-5" method="POST" action="" enctype="multipart/form-data">
 
-        <input type="hidden" name="id_annonce" value="<?= $id_annonce ?>">
+            <input type="hidden" name="id_annonce" value="<?= $id_annonce ?>">
 
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <label class="form-label" for="titre">
-                    <div class="badge badge-dark text-wrap">Titre</div>
-                </label>
-                <input class="form-control" type="text" name="titre" id="titre" placeholder="titre" value="<?= $titre ?>">
-            </div>
-
-            <div class="col-md-4">
-                <label class="form-label" for="description_courte">
-                    <div class="badge badge-dark text-wrap">Description courte</div>
-                </label>
-                <input class="form-control" type="text" name="description_courte" id="description_courte" placeholder="Description courte" value="<?= $description_courte ?>">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label" for="categorie_id">
-                    <div class="badge badge-dark text-wrap">Categorie</div>
-                </label>
-                <select class="form-control" name="categorie_id" id="categorie_id">
-                    <?php
-                    while ($categorie = $listeCategories->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<option value="' . $categorie['id_categorie'] . '">' . $categorie['titre'] . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-md-6">
-                <label class="form-label" for="description_longue">
-                    <div class="badge badge-dark text-wrap">Description longue</div>
-                </label>
-                <textarea class="form-control" name="description_longue" id="description_longue" placeholder="Description détaillée" rows="5"><?= $description_longue ?></textarea>
-            </div>
-        </div>
-
-
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <label class="form-label" for="pays">
-                    <div class="badge badge-dark text-wrap">Pays</div>
-                </label>
-                <input class="form-control" type="text" name="pays" id="pays" placeholder="pays" value="<?= $pays ?>">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label" for="ville">
-                    <div class="badge badge-dark text-wrap">Ville</div>
-                </label>
-                <input class="form-control" type="text" name="ville" id="ville" placeholder="ville" value="<?= $ville ?>">
-            </div>
-
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <label class="form-label" for="adresse">
-                    <div class="badge badge-dark text-wrap">Adresse</div>
-                </label>
-                <input class="form-control" type="text" name="adresse" id="adresse" placeholder="adresse" value="<?= $adresse ?>">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label" for="code_postal">
-                    <div class="badge badge-dark text-wrap">Code Postal</div>
-                </label>
-                <input class="form-control" type="number" name="code_postal" id="code_postal" placeholder="Code postal" value="<?= $code_postal ?>">
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <label class="form-label" for="photo">
-                    <div class="badge badge-dark text-wrap">Photo Principale</div>
-                </label>
-                <input class="form-control" type="file" name="photo" id="photo" placeholder="Photo">
-            </div>
-            <!-- ----------------- -->
-            <!-- Si la variable $photo a trouvé une information en BDD, on affiche ce  qui suit dans les accolades  -->
-            <?php if (!empty($photo)) : ?>
-                <div class="mt-4">
-                    <p>Vous pouvez changer d'image
-                        <img src="<?= URL . 'img/' . $photo ?>" width="50px">
-                    </p>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <label class="form-label" for="titre">
+                        <div class="badge badge-dark text-wrap">Titre</div>
+                    </label>
+                    <input class="form-control" type="text" name="titre" id="titre" placeholder="titre" value="<?= $titre ?>">
                 </div>
-            <?php endif; ?>
-            <!-- Pour modifier la photo existante par une nouvelle (voir ligne 62)  -->
-            <input type="hidden" name="photoActuelle" value="<?= $photo ?>">
-            <!-- -------------------- -->
-            <div class="col-md-4">
-                <label class="form-label" for="prix">
-                    <div class="badge badge-dark text-wrap">Prix</div>
-                </label>
-                <input class="form-control" type="number" name="prix" id="prix" placeholder="Prix" value="<?= $prix ?>">
+
+                <div class="col-md-4">
+                    <label class="form-label" for="description_courte">
+                        <div class="badge badge-dark text-wrap">Description courte</div>
+                    </label>
+                    <input class="form-control" type="text" name="description_courte" id="description_courte" placeholder="Description courte" value="<?= $description_courte ?>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="categorie_id">
+                        <div class="badge badge-dark text-wrap">Categorie</div>
+                    </label>
+                    <select class="form-control" name="categorie_id" id="categorie_id">
+                        <?php
+                        while ($categorie = $listeCategories->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $categorie['id_categorie'] . '">' . $categorie['titre'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <label class="form-label" for="description_longue">
+                        <div class="badge badge-dark text-wrap">Description longue</div>
+                    </label>
+                    <textarea class="form-control" name="description_longue" id="description_longue" placeholder="Description détaillée" rows="5"><?= $description_longue ?></textarea>
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <label class="form-label" for="pays">
+                        <div class="badge badge-dark text-wrap">Pays</div>
+                    </label>
+                    <input class="form-control" type="text" name="pays" id="pays" placeholder="pays" value="<?= $pays ?>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="ville">
+                        <div class="badge badge-dark text-wrap">Ville</div>
+                    </label>
+                    <input class="form-control" type="text" name="ville" id="ville" placeholder="ville" value="<?= $ville ?>">
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <label class="form-label" for="adresse">
+                        <div class="badge badge-dark text-wrap">Adresse</div>
+                    </label>
+                    <input class="form-control" type="text" name="adresse" id="adresse" placeholder="adresse" value="<?= $adresse ?>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" for="code_postal">
+                        <div class="badge badge-dark text-wrap">Code Postal</div>
+                    </label>
+                    <input class="form-control" type="number" name="code_postal" id="code_postal" placeholder="Code postal" value="<?= $code_postal ?>">
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <label class="form-label" for="photo">
+                        <div class="badge badge-dark text-wrap">Photo Principale</div>
+                    </label>
+                    <input class="form-control" type="file" name="photo" id="photo" placeholder="Photo">
+                </div>
+                <!-- ----------------- -->
+                <!-- Si la variable $photo a trouvé une information en BDD, on affiche ce  qui suit dans les accolades  -->
+                <?php if (!empty($photo)) : ?>
+                    <div class="mt-4">
+                        <p>Vous pouvez changer d'image
+                            <img src="<?= URL . 'img/' . $photo ?>" width="50px">
+                        </p>
+                    </div>
+                <?php endif; ?>
+                <!-- Pour modifier la photo existante par une nouvelle (voir ligne 62)  -->
+                <input type="hidden" name="photoActuelle" value="<?= $photo ?>">
+                <!-- -------------------- -->
+                <div class="col-md-4">
+                    <label class="form-label" for="prix">
+                        <div class="badge badge-dark text-wrap">Prix</div>
+                    </label>
+                    <input class="form-control" type="number" name="prix" id="prix" placeholder="Prix" value="<?= $prix ?>">
+                </div>
+            </div>
+
+            <div class="col-md-1 mt-5">
+                <button type="submit" class="btn btn-outline-dark btn-warning">Valider</button>
+            </div>
+
+        </form>
+    <?php else : ?>
+        <div class="row">
+            <div class="col-12">
+                <p>Veuillez vous connecter pour déposer une annonce</p>
             </div>
         </div>
-
-        <div class="col-md-1 mt-5">
-            <button type="submit" class="btn btn-outline-dark btn-warning">Valider</button>
-        </div>
-
-    </form>
-    <?php else : ?>
-    <div class="row">
-        <div class="col-12">
-            <p>Veuillez vous connecter pour déposer une annonce</p>
-        </div>
-    </div>
     <?php endif; ?>
 </div>
 
