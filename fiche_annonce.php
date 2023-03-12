@@ -4,7 +4,6 @@ require_once('include/init.php');
 // code a venir
 
 // récupération de l'annonce
-
 //REQUETE POUR RECUPERER TOUT 
 if (!empty($_GET['id_annonce'])) {
 

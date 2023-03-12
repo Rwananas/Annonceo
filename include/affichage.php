@@ -64,4 +64,17 @@ if (isset($_GET['id_Annonce'])) {
 
 //  fin fiche Annonce
 
+// Récupération des annonces en SQL
+$query = "SELECT annonce.*, pseudo, categorie.titre AS titre_categorie FROM annonce, categorie, membre WHERE id_membre = membre_id AND id_categorie = categorie_id";
+$afficheAnnonce = [];
+// ajoute un filtre pour récupérer uniquement les annonces associés à la catégorie
+if (isset($_GET['categorie_id'])) {
+    $query .= " AND categorie_id = :categorie_id";
+    $afficheAnnonce = ['categorie_id' => $_GET['categorie_id']];
+}
+// Process PDO pour récupéré le tableau d'annonce
+$stmt = $pdo->prepare($query);
+$stmt->execute($afficheAnnonce);
+$annonces = $stmt->fetchAll();
+
 // --------------------------------------------------------------------------------------------

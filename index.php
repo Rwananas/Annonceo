@@ -28,7 +28,7 @@ require_once('include/header.php');
         <div class="col-md-8">
 
             <div class="text-center my-5">
-                <img class='img-fluid' src="#" alt="Bandeau de La Boutique" loading="lazy">
+                <img class='img-fluid' src="./img/bandAnnonceo.svg" alt="Bandeau de La Boutique" loading="lazy">
             </div>
 
             <div class="row justify-content-around">
@@ -40,14 +40,14 @@ require_once('include/header.php');
             <div class="row justify-content-around text-center">
                 <?php while($produit = $afficheAnnonces->fetch(PDO::FETCH_ASSOC)): ?>
                 <div class="card mx-3 shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
-                    <a href="ficheAnnonce.php?id_produit=<?= $produit['id_annonce'] ?>"><img src="<?= URL . 'img/' . $produit['photo'] ?>" class="card-img-top" alt="..."></a>
+                    <a href="fiche_annonce.php?id_produit=<?= $produit['id_annonce'] ?>"><img src="<?= URL . 'img/' . $produit['photo'] ?>" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                         <h3 class="card-title"><?= $produit['titre'] ?></h3>
                         <h3 class="card-title">
                             <div class="badge badge-dark text-wrap"><?= $produit['prix'] ?> €</div>
                         </h3>
                         <p class="card-text"><?= $produit['description_courte'] ?></p>
-                        <a href="ficheAnnonce.php?id_produit=<?= $produit['id_annonce'] ?>" class="btn btn-outline-info"><i class='bi bi-search'></i> Voir Produit</a>
+                        <a href="fiche_annonce.php?id_produit=<?= $produit['id_annonce'] ?>" class="btn btn-outline-info"><i class='bi bi-search'></i> Voir Produit</a>
                     </div>
                 </div>
                 <?php endwhile; ?>
