@@ -3,24 +3,19 @@
 <!-- Footer -->
 </div>
 
-<footer class="bg-dark text-light py-3">
-<div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <p class="text-muted">© Annonceo 2023 - Tous droits réservés.</p>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Annonceo</span></strong>. All Rights Reserved
       </div>
-      <div class="col-md-6">
-        <ul class="list-inline float-end">
-          <li class="list-inline-item"><a href="#">Mentions légales</a></li>
-          <li class="list-inline-item"><a href="#">Conditions générales de vente</a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-facebook"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-        </ul>
+      <div class="credits">
+        
       </div>
     </div>
-  </div>
-</footer>
+  </footer><!-- End #footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
