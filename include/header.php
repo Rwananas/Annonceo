@@ -65,7 +65,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
         <a class="nav-link" href="<?= URL ?>QSN.php">Qui Sommes Nous</a>
       </li>
       <li class="nav-item mt-2">
-        <a class="nav-link" href="<?= URL ?>">Contact</a>
+        <a class="nav-link" href="<?= URL ?>contact.php">Contact</a>
       </li>
       <li class="nav-item mt-2">
         <a class="nav-link" href="<?= URL ?>annonce.php">Annonces</a>
