@@ -32,7 +32,7 @@ require_once('include/header.php');
 
             <div class="list-group text-center">
             <?php while($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)): ?>
-                <a class="btn btn-outline-info my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
+                <a class="btn btn-outline-light my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
             <?php endwhile; ?>
             </div>
 
@@ -145,11 +145,11 @@ require_once('include/header.php');
                     </li>
 
                     <li class="mx-1 page-item ">
-                        <a class="btn btn-outline-info " href=""></a>
+                        <a class="btn btn-outline-dark" href=""></a>
                     </li>
 
                     <li class="mx-1 page-item ">
-                        <a class="page-link text-info" href="" aria-label="Next">
+                        <a class="page-link text-dark" href="" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                         </a>
