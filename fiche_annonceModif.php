@@ -59,7 +59,7 @@ require_once('include/header.php');
             <div class="list-group text-center">
 
                 <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <a class="btn btn-outline-success my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['titre'] ?>"><?= $menuCategorie['titre'] ?></a>
+                    <a class="btn btn-outline-light my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['titre'] ?>"><?= $menuCategorie['titre'] ?></a>
                 <?php endwhile; ?>
 
             </div>
@@ -77,9 +77,11 @@ require_once('include/header.php');
                     <img src="<?= URL . 'img/' . $detail['photo'] ?>" class="card-img-top" alt="image du produit <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?>">
                     <div class="card-body">
                         <h3 class="card-title">
-                            <div class="badge badge-dark text-wrap"><?= $detail['prix'] ?> €</div>
+                            <div class="badge badge-dark text-wrap"><?= $detail['prix'] ?> €</div> <br>
+                            <div class="badge badge-dark text-wrap"><?= $detail['description_courte'] ?></div>
+                            
                         </h3>
-                        <p class="card-text"><?= $detail['description_courte'] ?></p>
+                        <p class="card text-dark"><?= $detail['description_longue'] ?></p>
                         <!-- ------------------- -->
                         <!-- condition pour savoir si on affiche un sélecteur pour choisir le nombre de produits que l'on veut (s'il y a du stock) ou si on afiche le message d'alerte qui indique une rupture de stock -->
                         <?php if ($detail['titre'] > 0) : ?>
@@ -96,7 +98,7 @@ require_once('include/header.php');
                                     <?php endfor; ?>
                                     <!-- ----------- -->
                                 </select>
-                                <button type="submit" class="btn btn-outline-success my-2" name="ajout_panier" value="ajout_panier"><i class="bi bi-plus-circle"></i> Panier <i class="bi bi-cart3"></i></button>
+                                <button type="submit" class="btn btn-outline-info my-2" name="ajout_panier" value="ajout_panier"><i class="bi bi-plus-circle"></i> Panier <i class="bi bi-cart3"></i></button>
                             </form>
                         <?php else : ?>
                             <!-- ----------- -->
@@ -106,7 +108,8 @@ require_once('include/header.php');
                         <?php endif; ?>
                         <!-- ------------ -->
                         <!-- lien pour retourner voir tous les produits de la même catégorie -->
-                        <p>Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a>
+                        <p>Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a> 
+                    </p>
                     </div>
                 </div>
             </div>

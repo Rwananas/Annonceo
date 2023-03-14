@@ -33,7 +33,7 @@ require_once('include/affichage.php');
 require_once('include/header.php');
 ?>
 
-<h1> <?= $infos_annonce['titre'] ?> </h1>
+<!-- <h1> <?= $infos_annonce['titre'] ?> </h1>
 <div class="col-md-12">
     <?php echo '<pre>';
     print_r($infos_annonce);
@@ -41,4 +41,4 @@ require_once('include/header.php');
     <?php echo '<pre>';
     var_dump($infos_photos_annexes);
     echo '</pre>'; ?>
-</div>
+</div> -->

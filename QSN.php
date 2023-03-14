@@ -47,15 +47,15 @@ require_once('include/header.php');
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex flex-column align-items-center">
 
-      <h1>Maundy</h1>
-      <h2>We're working hard to improve our website and we'll ready to launch after</h2>
+      <h1>Qui sommes nous ?</h1>
+      <h2>Nous travaillons dur afin d'offrir une qualité de service irréprochable</h2>
       
 
       <div class="subscribe">
-        <h4>Subscribe now to get the latest updates!</h4>
+        <h4>Inscrivez vous maintenant et recevez nos dernières offres promo</h4>
         <form action="forms/notify.php" method="post" role="form" class="php-email-form">
           <div class="subscribe-form">
-            <input type="email" name="email" required><input type="submit" value="Subscribe">
+            <input type="email" name="email" required><input type="submit" value="Inscription">
           </div>
           <div class="mt-2">
             <div class="loading">Loading</div>
@@ -82,7 +82,7 @@ require_once('include/header.php');
       <div class="container">
 
         <div class="section-title">
-          <h2>About Us</h2>
+          <h2>A propos</h2>
           <p>Illo velit quae dolorem voluptate pireda notila set. Corrupti voluptatum tempora iste ratione deleniti corrupti nostrum ut</p>
         </div>
 
@@ -112,7 +112,7 @@ require_once('include/header.php');
       <div class="container">
 
         <div class="section-title">
-          <h2>Contact Us</h2>
+          <h2>Contactez nous</h2>
         </div>
 
         <div class="row">
@@ -121,23 +121,23 @@ require_once('include/header.php');
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h4>Adresse:</h4>
+                <p>1 rue de la banque, Paris 75002</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <p>annonceo@mail.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <h4>Téléphone:</h4>
+                <p>01 22 33 44 55</p>
               </div>
-
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7211.841118067085!2d2.332304010876182!3d48.86803195321111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3c954c68fd%3A0x50b82c368941a60!2sParis%202e%20Arrondissement%2C%2075002%20Paris!5e0!3m2!1sfr!2sfr!4v1678805225712!5m2!1sfr!2sfr" width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe> -->
             </div>
 
           </div>
@@ -146,16 +146,16 @@ require_once('include/header.php');
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
+                  <label for="name">Nom</label>
                   <input type="text" name="name" class="form-control" id="name" required>
                 </div>
                 <div class="form-group col-md-6 mt-3 mt-md-0">
-                  <label for="name">Your Email</label>
+                  <label for="name">Email</label>
                   <input type="email" class="form-control" name="email" id="email" required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <label for="name">Subject</label>
+                <label for="name">Objet</label>
                 <input type="text" class="form-control" name="subject" id="subject" required>
               </div>
               <div class="form-group mt-3">
@@ -167,7 +167,7 @@ require_once('include/header.php');
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit">Envoyez</button></div>
             </form>
           </div>
 
