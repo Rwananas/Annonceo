@@ -74,13 +74,6 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
         <a class="nav-link" href="<?= URL ?>annonce.php">Annonces</a>
       </li>
       
-      <!-- -----------POUR AFFICHER LES CATEGORIE DANS LA NAV -->
-      <!-- <?php while($menuPublic = $afficheMenuPublics->fetch(PDO::FETCH_ASSOC)): ?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= URL ?>?public=<?= $menuPublic['titre'] ?>"><button type="button" class="btn btn-outline-info"><?= ucfirst($menuPublic['titre']) ?></button></a>
-      </li>
-      <?php endwhile; ?> -->
-      <!-- ---------- -->
     </ul>
     <ul class="navbar-nav ml-auto">
       <!-- -------------------------- -->

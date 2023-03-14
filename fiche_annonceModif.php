@@ -108,7 +108,7 @@ require_once('include/header.php');
                         <?php endif; ?>
                         <!-- ------------ -->
                         <!-- lien pour retourner voir tous les produits de la même catégorie -->
-                        <p>Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a> 
+                        <p class="text-dark">Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a> 
                     </p>
                     </div>
                 </div>
