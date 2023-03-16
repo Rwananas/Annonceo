@@ -77,18 +77,6 @@ require_once('include/header.php');
 
   <main id="main">
 
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>A propos</h2>
-          <p>Illo velit quae dolorem voluptate pireda notila set. Corrupti voluptatum tempora iste ratione deleniti corrupti nostrum ut</p>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
