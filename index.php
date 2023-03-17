@@ -118,6 +118,14 @@ require_once('include/header.php');
             <img class='img-fluid' src="img/bandAnnonceo.svg" alt="Bandeau de La Boutique" loading="lazy">
         </div>
 
+        <div class="row justify-content-center py-5">
+    <a href='?action=add'>
+        <button type="button" class="btn btn-sm btn-outline-dark shadow rounded">
+            <i class="bi bi-plus-circle-fill"></i> Ajouter un utilisateur
+        </button>
+    </a>
+</div>
+
     </div>
 <?php endif; ?>
 
