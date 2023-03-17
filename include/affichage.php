@@ -41,37 +41,7 @@ if(isset($_GET['categorie'])){
 
 // tout l'affichage par public
 // si jamais il y dans l'url public donc applique ce code
-if(isset($_GET['public'])){
 
-
-
-
-
-
-    // pagination annonces par public
-    
-    // fin pagination annonces par public
-
-    // affichage des annonces par public
-    //requete qui va cibler tous les annonces qui ont en commun le public récupéré dans l'URL
-     // est egal a ce qu'on recupere dans l'url, ex si ya enfant ds  l'url public recupere que les enfant
-    $afficheAnnonces = $pdo->query(" SELECT * FROM annonce WHERE public = '$_GET[public]' ORDER BY prix ASC ");
-   
-    // fin affichage des annonces par public
-
-    // affichage du public dans le <h2>
-
-    $afficheTitrePublic = $pdo->query("SELECT public FROM annonce WHERE public ='$_GET[public]'");
-    $titrePublic = $afficheTitrePublic->fetch(PDO::FETCH_ASSOC);
-    
-    // fin du </h2> pour le public
-
-
-    // pour les onglets publics
-    $pageTitle = "Nos vêtements " . ucfirst($_GET['public']) . 's';
-    
-    // fin onglets publics
-}
 // fin affichage par public
 
 // ---------------------------------------------------------------------------------------

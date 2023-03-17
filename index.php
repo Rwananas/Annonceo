@@ -32,7 +32,7 @@ require_once('include/header.php');
 
             <div class="list-group text-center">
                 <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <a class="btn btn-outline-light my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
+                    <a class="btn btn-outline-info my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
                 <?php endwhile; ?>
             </div>
 

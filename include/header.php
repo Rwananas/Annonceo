@@ -37,10 +37,11 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
     <link rel="icon" type="image/png" href="./img/logoAnnonceo.png" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-         <!-- links pour les icon bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-  
+    
+    <!-- links pour les icon bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="/admin/vendor/bootstrap/css/bootstrap.min.css">
   <script src="https://kit.fontawesome.com/896637ab26.js" crossorigin="anonymous"></script>
   <!-- code pour récupérer le nom de chaque page de manière dynamique on declare pour chaque fichier, une valeur à pageTitle
   Dans le cas de la page d'accueil/index, impossible d'avoir une valeur si on a cliqué sur rien, donc on ne peut pas déclarer dans index.php une valeur unique. Cela empecherait d'avoir un onglet dynamiqu si on veut afficher les manteaux, ou les vestes etc...
@@ -48,7 +49,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
     <title><?= (isset($pageTitle) ? $pageTitle : "Annonceo") ?></title>
 
     <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
 </head>
 <body>
 
