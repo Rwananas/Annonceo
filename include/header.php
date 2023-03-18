@@ -43,9 +43,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
     
     <link rel="stylesheet" href="/admin/vendor/bootstrap/css/bootstrap.min.css">
   <script src="https://kit.fontawesome.com/896637ab26.js" crossorigin="anonymous"></script>
-  <!-- code pour récupérer le nom de chaque page de manière dynamique on declare pour chaque fichier, une valeur à pageTitle
-  Dans le cas de la page d'accueil/index, impossible d'avoir une valeur si on a cliqué sur rien, donc on ne peut pas déclarer dans index.php une valeur unique. Cela empecherait d'avoir un onglet dynamiqu si on veut afficher les manteaux, ou les vestes etc...
-  Pour résoudre ce problème, on dit que si pageTitle existe (dans un fichier), on affiche sa valeur, si elle n'existe pas, on affiche La Boutique -->
+  
     <title><?= (isset($pageTitle) ? $pageTitle : "Annonceo") ?></title>
 
     <!-- Template Main CSS File -->
@@ -77,22 +75,22 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
       
     </ul>
     <ul class="navbar-nav ml-auto">
-      <!-- -------------------------- -->
+      
     <?php if(internauteConnecte()): ?>
-      <!-- si l'internaute est connecté il aura accés aux pages profil, panier et un bouton de deconnexion  (mais pas aux autres) -->
+      <!-- si l'internaute est connecté il aura accés aux pages profil et un bouton de deconnexion  (mais pas aux autres) -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <button type="button" class="btn btn-outline-info">Espace <strong><?= $_SESSION['membre']['pseudo'] ?></strong></button>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?= URL ?>profil.php">Profil <?= $_SESSION['membre']['pseudo'] ?></a>
-          <a class="dropdown-item" href="<?= URL ?>panier.php">Panier <?= $_SESSION['membre']['pseudo'] ?></a>
+          
           <a class="dropdown-item" href="<?= URL ?>index.php?action=deconnexion">Déconnexion</a>
         </div>
       </li>
     <?php else: ?>
-      <!-- ---------------------------- -->
-      <!-- si il n'est pas connecté, il aura droit aux pages inscription, connexion et panier (mais pas aux autres)-->
+      
+      <!-- si il n'est pas connecté, il aura droit aux pages inscription et connexion -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle mr-5" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <button type="button" class="btn btn-outline-info">Espace Membre</button>
@@ -100,7 +98,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?= URL ?>inscription.php"><button class="btn btn-outline-info">Inscription</button></a>
           <a class="dropdown-item"><button class="btn btn-outline-info" data-toggle="modal" data-target="#connexionModal">Connexion</button></a>
-          <a class="dropdown-item" href="<?= URL ?>panier.php"><button class="btn btn-outline-info px-4">Panier</button></a>
+          
         </div>
       </li>
       <?php endif; ?>
