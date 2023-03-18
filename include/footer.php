@@ -2,16 +2,26 @@
 </div>
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-  <div class="container text-center">
-    <div class="copyright text-center">
-        &copy; Copyright <strong><span>Annonceo</span></strong>. All Rights Reserved
+<footer class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="text-uppercase mb-4">Mentions légales</h5>
+        
       </div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      <div class="col-md-4">
+        <h5 class="text-uppercase mb-4 text-center">Copyright</h5>
+        <p class="text-muted">© Votre entreprise 2023. Tous droits réservés.</p>
+      </div>
+      <div class="col-md-4">
+        <h5 class="text-uppercase mb-4">Conditions générales de vente</h5>
+        
       </div>
     </div>
   </div>
-</footer><!-- End #footer -->
+</footer>
+
+<!-- End #footer -->
 
 
 <script src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
