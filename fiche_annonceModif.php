@@ -6,14 +6,14 @@ require_once('include/init.php');
 // récupération de l'annonce
 
 //REQUETE POUR RECUPERER TOUT 
-if(!empty($_GET['id_annonce'])) {
+if (!empty($_GET['id_annonce'])) {
 
     $recup_annonce = $pdo->prepare("SELECT annonce.*, pseudo, prenom, telephone, email, categorie.titre AS titre_categorie FROM annonce, categorie, membre WHERE id_membre = membre_id AND id_categorie = categorie_id AND id_annonce = :id_annonce");
     $recup_annonce->bindParam(':id_annonce', $_GET['id_annonce']);
     $recup_annonce->execute();
 
     // POUR RECUPERER LES PHOTOS
-    if($recup_annonce->rowCount() > 0) {
+    if ($recup_annonce->rowCount() > 0) {
         $infos_annonce = $recup_annonce->fetch(PDO::FETCH_ASSOC);
 
         $liste_photos_annexes = $pdo->prepare("SELECT * FROM photo WHERE id_photo = :id_photo");
@@ -24,7 +24,6 @@ if(!empty($_GET['id_annonce'])) {
     } else {
         header('location:index.php');
     }
-
 } else {
     header('location:index.php');
 }
@@ -42,14 +41,18 @@ require_once('include/header.php');
 
 <img src="<?= $infos_photos_annexes['photo1'] ?>" alt="">
 <div class="col-md-12">
-            <?php echo '<pre>'; print_r($infos_annonce); echo '</pre>'; ?>
-            <?php echo '<pre>'; var_dump($infos_photos_annexes); echo '</pre>'; ?>
+            <?php echo '<pre>';
+            print_r($infos_annonce);
+            echo '</pre>'; ?>
+            <?php echo '<pre>';
+            var_dump($infos_photos_annexes);
+            echo '</pre>'; ?>
         </div> -->
 
 
 
 
-        </div>
+</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -64,12 +67,19 @@ require_once('include/header.php');
 
             </div>
 
+
+            
+
+
+
+
+
         </div>
         <!-- fin de la colonne catégories -->
         <div class="col-md-8">
 
             <h2 class='text-center my-5'>
-                <div class="badge badge-dark text-wrap p-3">Fiche du produit <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?></div>
+                <div class="badge badge-dark text-wrap p-3">Fiche de l'annonce <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?></div>
             </h2>
 
             <div class="row justify-content-around text-center py-5">
@@ -79,7 +89,7 @@ require_once('include/header.php');
                         <h3 class="card-title">
                             <div class="badge badge-dark text-wrap"><?= $detail['prix'] ?> €</div> <br>
                             <div class="badge badge-dark text-wrap"><?= $detail['description_courte'] ?></div>
-                            
+
                         </h3>
                         <p class="card text-dark"><?= $detail['description_longue'] ?></p>
                         <!-- ------------------- -->
@@ -108,8 +118,8 @@ require_once('include/header.php');
                         <?php endif; ?>
                         <!-- ------------ -->
                         <!-- lien pour retourner voir tous les produits de la même catégorie -->
-                        <p class="text-dark">Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a> 
-                    </p>
+                        <p class="text-dark">Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -30,11 +30,22 @@ require_once('include/header.php');
 
         <div class="col-md-2">
 
-            <div class="list-group text-center">
-                <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <a class="btn btn-outline-info my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
-                <?php endwhile; ?>
-            </div>
+            
+
+            <!-- AFFICHER LES CATEGORIES DANS UN MENU DEROULANT -->
+            <!-- N'AFFICHE PAS LES CATEGORIES -->
+
+            <form method="post" action="traitement-formulaire.php">
+                <div class="form-group">
+                    <label for="categorie">Catégorie:</label>
+                    <select class="form-control" id="categorie" name="categorie">
+                        <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <option value="<?= $menuCategorie['titre'] ?>"><?= $menuCategorie['titre'] ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </form>
 
         </div>
 
