@@ -59,12 +59,12 @@ require_once('include/header.php');
                             <a href="fiche_annonceModif.php?id_annonce=<?= $annonce['id_annonce'] ?>"><img src="<?= URL . 'img/' . $annonce['photo'] ?>" class="card-img-top" alt="..."></a>
                             <div class="card-body">
                                 <h3 class="card-title">
-                                <div class="badge badge-dark text-wrap"><?= $annonce['titre'] ?></div>
-                            </h3>
+                                    <div class="badge badge-dark text-wrap"><?= $annonce['titre'] ?></div>
+                                </h3>
                                 <h3 class="card-title">
                                     <div class="badge badge-dark text-wrap"><?= $annonce['description_courte'] ?></div>
                                 </h3>
-                                
+
                                 <a href="fiche_annonceModif.php?id_annonce=<?= $annonce['id_annonce'] ?>" class="btn btn-outline-info"><i class='bi bi-search'></i> Voir Annonce</a>
                             </div>
                         </div>
@@ -117,15 +117,6 @@ require_once('include/header.php');
         <div class="row justify-content-around py-5">
             <img class='img-fluid' src="img/bandAnnonceo.svg" alt="Bandeau de La Boutique" loading="lazy">
         </div>
-
-        <div class="row justify-content-center py-5">
-    <a href='?action=add'>
-        <button type="button" class="btn btn-sm btn-outline-dark shadow rounded">
-            <i class="bi bi-plus-circle-fill"></i> Ajouter un utilisateur
-        </button>
-    </a>
-</div>
-
     </div>
 <?php endif; ?>
 
