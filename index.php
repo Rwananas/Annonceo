@@ -30,7 +30,13 @@ require_once('include/header.php');
 
         <div class="col-md-2">
 
-            
+            <div class="list-group text-center">
+                <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
+                    <a class="btn btn-outline-info my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['id_categorie'] ?>"><?= $menuCategorie['titre'] ?></a>
+                <?php endwhile; ?>
+            </div>
+
+
 
             <!-- AFFICHER LES CATEGORIES DANS UN MENU DEROULANT -->
             <!-- N'AFFICHE PAS LES CATEGORIES -->
@@ -112,16 +118,9 @@ require_once('include/header.php');
                 </nav>
 
             </div>
-
-            <!-- ----------------------- -->
-            <!-- pour afficher les vetements  par public -->
-
-
-
-
     </div>
 
-    <!-- ------------------------------ -->
+    
 <?php else : ?>
     <div class="col-md-8">
 

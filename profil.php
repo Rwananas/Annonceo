@@ -53,7 +53,7 @@ require_once('include/header.php');
                     <h4>Modifier mes informations personnelles</h4>
                 </div>
                 <div class="card-body">
-                    <form action="update.php" method="POST">
+                    <form action="update_pseudo.php" method="POST">
                         <div class="mb-3">
                             <label for="new_pseudo" class="form-label">Pseudo</label>
                             <input type="text" class="form-control" id="new_pseudo" name="new_pseudo" value="<?= $_SESSION['membre']['pseudo'] ?>">

@@ -64,7 +64,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item mt-2">
-        <a class="nav-link" href="<?= URL ?>index.php">Accueil</a>
+        <a class="nav-link" href="<?= URL ?>voirAnnonces.php">Voir les annonces</a>
       </li>
       <li class="nav-item mt-2 mx-2">
         <a class="nav-link" href="<?= URL ?>QSN.php">Qui Sommes Nous</a>
