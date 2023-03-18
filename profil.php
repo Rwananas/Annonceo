@@ -43,29 +43,7 @@ require_once('include/header.php');
 <?= $validate ?>
 
 
-
-<!-- $validate .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
-                    Félicitations <strong>' . $_SESSION['membre']['pseudo'] .'</strong>, vous etes connecté 😉 !
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>'; -->
-
-
-
-<!-- <div class="row justify-content-around py-5">
-    <div class="col-md-3 text-center">
-        <ul class="list-group">
-            <li class="btn btn-outline-success text-dark my-3 shadow bg-white rounded"><?= $_SESSION['membre']['pseudo'] ?></li>
-            <li class="btn btn-outline-success text-dark my-3 shadow bg-white rounded"><?= $_SESSION['membre']['prenom'] ?></li>
-            <li class="btn btn-outline-success text-dark my-3 shadow bg-white rounded"><?= $_SESSION['membre']['nom'] ?></li>
-            <li class="btn btn-outline-success text-dark my-3 shadow bg-white rounded"><?= $_SESSION['membre']['email'] ?></li>
-            <li class="btn btn-outline-success text-dark my-3 shadow bg-white rounded"><?= $_SESSION['membre']['telephone'] ?></li>
-        </ul>
-    </div>
-</div> -->
-
-<!-- ////////////////////////////////////////////////////////////////// -->
+<!-- FORMULAIRE DE MODIFICATION DE PROFIL -->
 
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -106,18 +84,7 @@ require_once('include/header.php');
     </div>
 </div>
 
-
-<div class="row justify-content-center py-5">
-    <div class="col-md-6 text-center">
-        <a href="<?= URL ?>fiche_annonce.php">
-            <button type="button" class="btn btn-warning btn-sm shadow rounded">
-                <i class="bi bi-plus-circle-fill"></i> Voir votre annonce
-            </button>
-        </a>
-    </div>
-</div>
-
-
+<!-- LISTE/AFFICHAGE DES ANNONCES DANS LE PROFIL -->
 <?php
 // Récupération des annonces du membre
 $id_membre = $_SESSION['membre']['id_membre'];
