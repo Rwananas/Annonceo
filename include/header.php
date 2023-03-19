@@ -84,6 +84,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?= URL ?>profil.php">Profil <?= $_SESSION['membre']['pseudo'] ?></a>
+          <a class="dropdown-item" href="<?= URL ?>annonce.php">Créer une annonce</a>
           
           <a class="dropdown-item" href="<?= URL ?>index.php?action=deconnexion">Déconnexion</a>
         </div>
