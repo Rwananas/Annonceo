@@ -55,56 +55,33 @@ require_once('include/header.php');
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <!-- debut de la colonne qui va afficher les categories -->
-        <div class="col-md-2">
-
-            <div class="list-group text-center">
-
-                <?php while ($menuCategorie = $afficheMenuCategories->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <a class="btn btn-outline-light my-2" href="<?= URL ?>?categorie=<?= $menuCategorie['titre'] ?>"><?= $menuCategorie['titre'] ?></a>
-                <?php endwhile; ?>
-
-            </div>
-
-        </div>
-        <!-- fin de la colonne catégories -->
-        <div class="col-md-8">
-
+    <div class="row justify-content-center py-5">
+        <div class="col-md-10">
             <h2 class='text-center my-5'>
                 <div class="badge badge-dark text-wrap p-3">Fiche de l'annonce <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?></div>
             </h2>
-
-            <div class="row justify-content-around text-center py-5">
-                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 22rem;">
-                    <img src="<?= URL . 'img/' . $detail['photo'] ?>" class="card-img-top" alt="image du produit <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?>">
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <div class="badge badge-dark text-wrap"><?= $detail['prix'] ?> €</div> <br>
-                            <div class="badge badge-dark text-wrap"><?= $detail['description_courte'] ?></div>
-
-                        </h3>
-                        <p class="card text-dark"><?= $detail['description_longue'] ?></p>
-                        <!-- ------------------- -->
-                        <!-- condition pour savoir si on affiche un sélecteur pour choisir le nombre de produits que l'on veut (s'il y a du stock) ou si on afiche le message d'alerte qui indique une rupture de stock -->
-                        <?php if ($detail['titre'] > 0) : ?>
-                            <!-- La quantité désirée sera récupérée sur la page panier (pour savoir combien il veut acheter), donc on indique dans l'attribut action, le nom du fichier panier.php -->
-                            
-                        <?php else : ?>
-                            <!-- ----------- -->
-                            <p class="card-text">
-                            <div class="badge badge-danger text-wrap p-3">Produit en rupture de stock</div>
-                            </p>
-                        <?php endif; ?>
-                        <!-- ------------ -->
-                        <p class="text-dark">Voir tous les modèles <a href="<?= URL ?>?categorie=<?= $detail['categorie_id'] ?>">de la même catégorie</a>
-                        </p>
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <img src="<?= URL . 'img/' . $detail['photo'] ?>" class="img-fluid" alt="image de l'annonce <?= substr($detail['categorie_id'], 0, -1) . " " . $detail['titre'] ?>">
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title"><?= $detail['titre'] ?></h5>
+                    <p class="card-text"><?= $detail['description_longue'] ?></p>
+                    <p class="card-text">Pays : <?= $detail['pays'] ?></p>
+                    <p class="card-text">Ville : <?= $detail['ville'] ?></p>
+                    <p class="card-text">Adresse : <?= $detail['adresse'] ?></p>
+                    <p class="card-text">Code postal : <?= $detail['code_postal'] ?></p>
+                    <p class="card-text">Prix : <?= $detail['prix'] ?> €</p>
+                    <p class="card-text"><small class="text-muted">Publiée le <?= $detail['date_enregistrement'] ?></small></p>
+                    <a href="<?= URL ?>modifier_annonce.php?id=<?= $detail['id_annonce'] ?>" class="btn btn-sm btn-primary">Sélectionner</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <div class="container">
 

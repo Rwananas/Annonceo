@@ -106,6 +106,8 @@ $annonces = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p class="card-text"><?= $annonce['description_longue'] ?></p>
                     <p class="card-text"><small class="text-muted">Publiée le <?= $annonce['date_enregistrement'] ?></small></p>
                     <a href="<?= URL ?>modifier_annonce.php?id=<?= $annonce['id_annonce'] ?>" class="btn btn-sm btn-primary">Modifier</a>
+                    <a href="<?= URL ?>fiche_annonceModif.php?id=<?= $annonce['id_annonce'] ?>" class="btn btn-sm btn-primary">Voir l'annonce</a>
+                    <a data-href="?action=delete&id_annonce=<?= $annonce['id_annonce'] ?>" class="btn btn-sm btn-danger">Supprimer</a>
                 </div>
             </div>
         <?php } ?>

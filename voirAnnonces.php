@@ -21,24 +21,23 @@ if (isset($_GET['annonce']) && $_GET['annonce'] == "inexistant") {
                         Annonce inexistante
                     </div>";
 }
-// pagination selon les annonces
-// si un indice page existe dans l'url et qu'on retrouve une valeur dedans
-if (isset($_GET['page']) && !empty($_GET['page'])) {
+// PAGINATION GESTION ANNONCES
 
+
+// Si un indice page existe dans l'URL et qu'on trouve une valeur dedans 
+if (isset($_GET['page']) && !empty($_GET['page'])) {
     $pageCourante = (int) strip_tags($_GET['page']);
 } else {
-    // $pageCourante prendra la valeur de defaut qui est 1
     $pageCourante = 1;
 }
-$queryAnnonces = $pdo->query("SELECT COUNT(id_annonce) AS nombreAnnonces FROM Annonce");
+$queryAnnonces = $pdo->query(" SELECT COUNT(id_annonce) AS nombreAnnonces FROM Annonce ");
 $resultatAnnonces = $queryAnnonces->fetch();
 $nombreAnnonces = (int) $resultatAnnonces['nombreAnnonces'];
-// echo debug($nombreAnnonces);
-// je veux que sur chaque page s'affiche 5 Annonces
-$parPage =  5;
-$nombrePages = ceil($nombreAnnonces / $parPage);
+$parPage = 5;
+$nombresPages = ceil($nombreAnnonces / $parPage);
 $premierAnnonce = ($pageCourante - 1) * $parPage;
-// fin pagination
+
+// FIN PAGINATION GESTION ANNONCES
 
 // fin pagination
 require_once('include/affichage.php');
@@ -125,6 +124,7 @@ require_once('include/header.php');
 
         <!-- ------------------------------ -->
     <?php else : ?>
+        
 </div>
 <div class="p-5">
     <form method="post" action="" name="form_filtres" class>
@@ -189,16 +189,7 @@ require_once('include/header.php');
             <div class="  col-sm-6 col-12">
     </form>
 
-    <!-- Bandeau du site Annonceo -->
-    <div class="w-100">
-        <div class="row justify-content-around ">
-            <img class='img-fluid' src="img/imglateralAnnonceo.png" alt="Bandeau du site Annonceo" loading="lazy">
-        </div>
-    </div>
 <?php endif; ?>
-
-</div>
-</div>
 
 <?= $erreur ?>
 
@@ -285,7 +276,7 @@ while ($arrayAnnonce = $afficheAnnonce->fetch(PDO::FETCH_ASSOC)) :
                     <?php if ($arrayAnnonce['photo'] != "") :  ?>
                         <img class='w-100' src="img/<?= $arrayAnnonce['photo'] ?>" alt="<?= $arrayAnnonce['titre'] ?>" title="<?= $arrayAnnonce['titre'] ?>">
                     <?php else :  ?>
-                        <img class='w-50' src="img/" alt="" title="Image par défaut">
+                        <img class='w-50' src="img/" alt="image de l'annonce" title="Image par défaut">
                     <?php endif;  ?>
                 </div>
                 <!-- Description -->
@@ -318,14 +309,14 @@ while ($arrayAnnonce = $afficheAnnonce->fetch(PDO::FETCH_ASSOC)) :
             </a>
         </li>
         <!-- AFFICHE LE NOMBRE DE PAGES -->
-        <?php for ($page = 1; $page <= $nombrePages; $page++) : ?>
+        <?php for ($page = 1; $page <= $nombresPages; $page++) : ?>
             <li class="mx-1 page-item <?= ($pageCourante == $page) ? 'active' : "" ?>">
                 <a class="btn btn-outline-dark " href="?page=<?= $page ?>"><?= $page ?></a>
             </li>
         <?php endfor; ?>
 
         <!-- FIN NOMBRE DE PAGES -->
-        <li class="page-item <?= ($pageCourante == $nombrePages) ? 'disabled' : '' ?>">
+        <li class="page-item <?= ($pageCourante == $nombresPages) ? 'disabled' : '' ?>">
             <a class="page-link text-dark" href="?page=<?= $pageCourante + 1 ?>" aria-label="Next">
                 <span aria-hidden="true">suivante</span>
                 <span class="sr-only">Next</span>

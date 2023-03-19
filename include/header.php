@@ -168,4 +168,4 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
 
 <h1 class="text-center mt-5"><div class="badge badge-dark text-wrap p-3">ANNONCEO</div></h1>
 <h2 class="text-center pb-5">Numéro #1 des sites d'achat en ligne</h2>
-<P><?= $erreur ?></p>
+<p><?= $erreur ?></p>
