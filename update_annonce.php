@@ -1,6 +1,6 @@
 
 <?php
-
+session_start();
 require_once('include/init.php');
 
 $id_membre = $_SESSION['membre']['id_membre'];
@@ -30,6 +30,6 @@ $_SESSION['membre']['email'] = $new_email;
 $_SESSION['membre']['telephone'] = $new_telephone;
 
 // Redirection vers la page de profil
-header("Location: " . URL . 'profil.php');
+header('Location: profil.php');
 exit();
 ?>

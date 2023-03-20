@@ -19,7 +19,7 @@ function debug($var, $mode = 1){
 
 }
 
-// fonction qui détermine si un utilisateur est connecté ou non (pourpersonnaliser son affichage, sa navigation)
+// fonction qui détermine si un utilisateur est connecté ou non (pour personnaliser son affichage, sa navigation)
 function internauteConnecte(){
     // si un fichier contenant une session nommée membre n'existe pas (dans le dossier wamp/tmp), alors la fonction internauteConnecte retourne FALSE, non il n'est pas connecté
     if(!isset($_SESSION['membre'])){

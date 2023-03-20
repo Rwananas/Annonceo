@@ -68,7 +68,7 @@ require_once('include/header.php');
                         </div>
                         <div class="mb-3">
                             <label for="new_mail" class="form-label">Adresse email</label>
-                            <input type="email" class="form-control" id="new_mail" name="new_mail" value="<?= $_SESSION['membre']['email'] ?>">
+                            <input type="email" class="form-control" id="new_email" name="new_email" value="<?= $_SESSION['membre']['email'] ?>">
                         </div>
                         <div class="mb-3">
                             <label for="new_telephone" class="form-label">Numéro de téléphone</label>
