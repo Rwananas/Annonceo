@@ -64,7 +64,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item mt-2">
-        <a class="nav-link" href="<?= URL ?>voirAnnonces.php">Voir les annonces</a>
+        <a class="nav-link" href="<?= URL ?>pageAnnonces.php">Voir les Annonces</a>
       </li>
       <li class="nav-item mt-2 mx-2">
         <a class="nav-link" href="<?= URL ?>QSN.php">Qui Sommes Nous</a>
@@ -84,7 +84,7 @@ $afficheMenuPublics = $pdo->query(" SELECT DISTINCT titre FROM categorie ORDER B
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<?= URL ?>profil.php">Profil <?= $_SESSION['membre']['pseudo'] ?></a>
-          <a class="dropdown-item" href="<?= URL ?>annonce.php">Créer une annonce</a>
+          <a class="dropdown-item" href="<?= URL ?>depotAnnonce.php">Créer une annonce</a>
           
           <a class="dropdown-item" href="<?= URL ?>index.php?action=deconnexion">Déconnexion</a>
         </div>

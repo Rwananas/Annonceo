@@ -80,7 +80,7 @@ require_once('include/header.php');
 <div class="row justify-content-center py-5">
     <div class="col-md-8">
         <h2 class="mb-4">Modifier votre annonce</h2>
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" action="update_annonce.php" enctype="multipart/form-data">
             <input type="hidden" name="id_annonce" value="<?= $annonce['id_annonce'] ?>">
             <div class="form-group">
                 <label for="titre">Titre de l'annonce :</label>
