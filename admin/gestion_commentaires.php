@@ -17,10 +17,6 @@ if (isset($_GET['action'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format commentaire !</div>';
         }
 
-       
-
-       
-
         if (empty($erreur)) {
           
             if ($_GET['action'] == 'update') {
@@ -103,7 +99,7 @@ require_once('includeAdmin/header.php');
 
 
 <table class="table table-dark text-center table-responsive">
-    <?php $afficheCommentaire = $pdo->query("SELECT * FROM commentaire ORDER BY commentaire ASC "); ?>
+    <?php $afficheCommentaire = $pdo->query("SELECT * FROM commentaire ORDER BY date_enregistrement ASC "); ?>
     <thead>
         <tr>
             <?php for ($i = 0; $i < $afficheCommentaire->columnCount(); $i++) :

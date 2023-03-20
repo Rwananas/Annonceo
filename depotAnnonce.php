@@ -126,7 +126,7 @@ if ($_POST) {
         //     </div>';
 
 
-        $addAnnonce = $pdo->prepare(" INSERT INTO Annonce (membre_id, categorie_id, titre, description_courte, description_longue, prix, pays, ville, code_postal, adresse, photo, date_enregistrement) VALUES (:membre_id, :categorie_id, :titre, :description_courte, :description_longue, :prix, :pays, :ville, :code_postal, :adresse, :photo, NOW()) ");
+        $addAnnonce = $pdo->prepare(" INSERT INTO annonce (membre_id, categorie_id, titre, description_courte, description_longue, prix, pays, ville, code_postal, adresse, photo, date_enregistrement) VALUES (:membre_id, :categorie_id, :titre, :description_courte, :description_longue, :prix, :pays, :ville, :code_postal, :adresse, :photo, NOW()) ");
 
         $addAnnonce->bindValue(':membre_id', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
         $addAnnonce->bindValue(':categorie_id', $_POST['categorie_id'], PDO::PARAM_STR);

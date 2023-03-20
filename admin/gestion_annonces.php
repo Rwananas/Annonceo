@@ -84,7 +84,7 @@ if (isset($_GET['action'])) {
 
         if (empty($erreur)) {
             if ($_GET['action'] == 'update') {
-                $modifAnnonce =  $pdo->prepare(" UPDATE Annonce SET id_annonce = :id_annonce, titre = :titre, description_courte = :description_courte, description_longue = :description_longue, prix = :prix, pays = :pays, ville = :ville, code_postal = :code_postal, adresse = :adresse, photo = :photo  WHERE id_annonce = :id_annonce");
+                $modifAnnonce =  $pdo->prepare(" UPDATE annonce SET id_annonce = :id_annonce, titre = :titre, description_courte = :description_courte, description_longue = :description_longue, prix = :prix, pays = :pays, ville = :ville, code_postal = :code_postal, adresse = :adresse, photo = :photo  WHERE id_annonce = :id_annonce");
                 $modifAnnonce->bindValue(':id_annonce', $_POST['id_annonce'], PDO::PARAM_STR);
                 $modifAnnonce->bindValue(':titre', $_POST['titre'], PDO::PARAM_STR);
                 $modifAnnonce->bindValue(':description_courte', $_POST['description_courte'], PDO::PARAM_STR);
@@ -99,7 +99,7 @@ if (isset($_GET['action'])) {
                 $modifAnnonce->execute();
 
                 // Pour personnaliser le message de réussite, je dois récupérer le TITRE de l'ANNONCE modifiée en BDD, pour perso le message
-                $selectAnnonce = $pdo->query(" SELECT titre FROM Annonce WHERE id_annonce = '$_GET[id_annonce]' ");
+                $selectAnnonce = $pdo->query(" SELECT titre FROM annonce WHERE id_annonce = '$_GET[id_annonce]' ");
                 $Annonce = $selectAnnonce->fetch(PDO::FETCH_ASSOC);
                 $content .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
                     <strong>Félicitations !</strong> Modification du Annonce ' . $Annonce['titre'] . ' réussie !
@@ -109,7 +109,7 @@ if (isset($_GET['action'])) {
                 </div>';
             } else {
                 // si on récupère autre chose que update (et donc add) on entame une procédure d'insertion en BDD
-                $addAnnonce = $pdo->prepare(" INSERT INTO Annonce (membre_id, categorie_id, titre, description_courte, description_longue, prix, pays, ville, code_postal, adresse, photo, date_enregistrement) VALUES (:membre_id, :categorie_id, :titre, :description_courte, :description_longue, :prix, :pays, :ville, :code_postal, :adresse, :photo, NOW()) ");
+                $addAnnonce = $pdo->prepare(" INSERT INTO annonce (membre_id, categorie_id, titre, description_courte, description_longue, prix, pays, ville, code_postal, adresse, photo, date_enregistrement) VALUES (:membre_id, :categorie_id, :titre, :description_courte, :description_longue, :prix, :pays, :ville, :code_postal, :adresse, :photo, NOW()) ");
 
                 $addAnnonce->bindValue(':membre_id', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
                 $addAnnonce->bindValue(':categorie_id', $_POST['categorie_id'], PDO::PARAM_STR);
@@ -150,7 +150,7 @@ if (isset($_GET['action'])) {
 
     // SUPPRESSION ANNONCE
     if ($_GET['action'] == 'delete') {
-        $pdo->query(" DELETE FROM Annonce WHERE id_annonce = '$_GET[id_annonce]' ");
+        $pdo->query(" DELETE FROM annonce WHERE id_annonce = '$_GET[id_annonce]' ");
         $content .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
                 <strong>Suppression Annonce effectuée !</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

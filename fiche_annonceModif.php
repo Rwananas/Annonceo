@@ -1,11 +1,55 @@
 <?php
 require_once('include/init.php');
 
-// code a venir
+// RECUPERATION DES COMMENTAIRES ET NOTES
+// Connexion à la base de données
+// Vérification de la connexion
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "annonceo";
 
-// récupération de l'annonce
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-//REQUETE POUR RECUPERER TOUT 
+// Vérification de la connexion
+if ($conn->connect_error) {
+    die("La connexion a échoué: " . $conn->connect_error);
+}
+
+
+if ($conn->connect_error) {
+    die("La connexion a échoué: " . $conn->connect_error);
+}
+
+// Traitement du formulaire
+if (isset($_POST["comment"])) {
+    // Récupération du commentaire
+    $comment = $_POST["comment"];
+
+    // Insertion dans la base de données
+    $sql = "INSERT INTO commentaire (commentaire) VALUES (?)";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Erreur de préparation de la requête : " . $conn->error);
+    }
+    $stmt->bind_param("s", $comment);
+    if (!$stmt->execute()) {
+        die("Erreur lors de l'exécution de la requête : " . $stmt->error);
+    }
+    $stmt->close();
+
+    // Message de confirmation
+    echo "Le commentaire a été enregistré avec succès !";
+}
+
+// Fermeture de la connexion à la base de données
+$conn->close();
+
+
+
+
+
+//REQUETE POUR RECUPERER TOUTE LES INFOS DE L'ANNONCE 
 if (!empty($_GET['id_annonce'])) {
 
     $recup_annonce = $pdo->prepare("SELECT annonce.*, pseudo, prenom, telephone, email, categorie.titre AS titre_categorie FROM annonce, categorie, membre WHERE id_membre = membre_id AND id_categorie = categorie_id AND id_annonce = :id_annonce");
@@ -76,7 +120,7 @@ require_once('include/header.php');
                     <a href="<?= URL ?>modifier_annonce.php?id=<?= $detail['id_annonce'] ?>" class="btn btn-sm btn-primary">Ajouter au panier</a>
                 </div>
             </div>
-            <form>
+            <!-- <form method="post">
                 <div class="form-group">
                     <label for="comment">Commentaire:</label>
                     <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
@@ -86,6 +130,16 @@ require_once('include/header.php');
                     <input type="number" class="form-control" id="rating" name="rating" min="1" max="5">
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form> -->
+
+
+            <form method="post" action="script.php">
+                <div class="form-group">
+                    <label for="commentaire">Commentaire :</label>
+                    <textarea class="form-control" id="commentaire" name="commentaire" rows="3"></textarea>
+                </div>
+                <input type="hidden" name="action" value="add">
+                <button type="submit" class="btn btn-primary">Ajouter le commentaire</button>
             </form>
         </div>
     </div>
