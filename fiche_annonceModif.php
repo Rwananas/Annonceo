@@ -73,9 +73,20 @@ require_once('include/header.php');
                     <p class="card-text">Code postal : <?= $detail['code_postal'] ?></p>
                     <p class="card-text">Prix : <?= $detail['prix'] ?> €</p>
                     <p class="card-text"><small class="text-muted">Publiée le <?= $detail['date_enregistrement'] ?></small></p>
-                    <a href="<?= URL ?>modifier_annonce.php?id=<?= $detail['id_annonce'] ?>" class="btn btn-sm btn-primary">Sélectionner</a>
+                    <a href="<?= URL ?>modifier_annonce.php?id=<?= $detail['id_annonce'] ?>" class="btn btn-sm btn-primary">Ajouter au panier</a>
                 </div>
             </div>
+            <form>
+                <div class="form-group">
+                    <label for="comment">Commentaire:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="rating">Note:</label>
+                    <input type="number" class="form-control" id="rating" name="rating" min="1" max="5">
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
         </div>
     </div>
 </div>

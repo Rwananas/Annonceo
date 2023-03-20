@@ -41,7 +41,7 @@ if (isset($_GET['action'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format description_longue !</div>';
         }
         // PRIX
-        if (!isset($_POST['prix']) || !preg_match('#^[0-9]{1,4}$#', $_POST['prix'])) {
+        if (!isset($_POST['prix']) || !preg_match('#^[0-9]{1,6}$#', $_POST['prix'])) {
             $erreur .= '<div class="alert alert-danger" role="alert">Erreur format prix !</div>';
         }
         // PAYS

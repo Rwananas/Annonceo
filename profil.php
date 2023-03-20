@@ -10,7 +10,7 @@ if (!internauteConnecte()) {
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'validate') {
-    $validate .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+    $content .= '<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
                     Félicitations <strong>' . $_SESSION['membre']['pseudo'] . '</strong>, vous etes connecté 😉 !
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -40,7 +40,7 @@ require_once('include/header.php');
     ?>
 </h2>
 
-<?= $validate ?>
+<?= $content ?>
 
 
 <!-- FORMULAIRE DE MODIFICATION DE PROFIL -->
