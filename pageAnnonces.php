@@ -68,7 +68,7 @@ require_once('include/header.php');
             <div class="row justify-content-around text-center">
                 <?php while ($annonce = $afficheAnnonces->fetch(PDO::FETCH_ASSOC)) : ?>
                     <div class="card mx-3 shadow p-3 mb-5 bg-white rounded">
-                        <a href="fiche_annonce.php?id_annonce= <?= $annonce['id_annonce'] ?>"><img src="<?= URL . 'img/' . $annonce['photo'] ?>" class="card-img-top" alt="Photo de <?= $annonce['titre'] ?>"></a>
+                        <a href="fiche_annonceModif.php?id_annonce= <?= $annonce['id_annonce'] ?>"><img src="<?= URL . 'img/' . $annonce['photo'] ?>" class="card-img-top" alt="Photo de <?= $annonce['titre'] ?>"></a>
                         <div class="card-body">
                             <h3 class="card-title"><?= $annonce['titre'] ?></h3>
                             <h3 class="card-title">
@@ -76,7 +76,7 @@ require_once('include/header.php');
                             </h3>
                             <p class="card-text"><?= $annonce['description_courte'] ?></p>
                             <!-- Requete pour véhiculer l'id de chaque annonce et pouvoir l'afficher et basculer sur la page fiche annonce  -->
-                            <a href="<?= URL ?>fiche_annonce.php?id_annonce=<?= $annonce['id_annonce'] ?>" class="btn btn-outline-dark"><i class='bi bi-search'></i> Voir Annonce</a>
+                            <a href="<?= URL ?>fiche_annonceModif.php?id_annonce=<?= $annonce['id_annonce'] ?>" class="btn btn-outline-dark"><i class='bi bi-search'></i> Voir Annonce</a>
                         </div>
                     </div>
                 <?php endwhile; ?>
@@ -95,7 +95,7 @@ require_once('include/header.php');
                 </h2>
             </div>
 
-            
+
 
             <nav aria-label="">
                 <!-- dans les 3 <a href> je dois faire référence à la catégorie, en plus de la page, sinon cela ne fonctionnera pas -->
@@ -124,17 +124,17 @@ require_once('include/header.php');
 
         <!-- ------------------------------ -->
     <?php else : ?>
-        
+
 </div>
 <div class="p-5">
-    <form method="post" action="" name="form_filtres" class>
+    <form method="post" action="" name="form_filtres">
         <br><br>
         <div class="row">
             <!-- Filtres de recherche -->
             <div class="col-md-4">
                 <label for="ordre">Trier</label>
                 <select name="ordre" id="ordre" class="form-control col-sm-10">
-                    <option>Trier</option>
+                    <option value="" disabled selected>Trier</option>
                     <option value="prix_ascendant">Du - cher au + cher</option>
                     <option value="prix_descendant">Du + cher au - cher</option>
                     <option value="date_ascendant">Du - ancien au + ancien</option>
@@ -147,12 +147,13 @@ require_once('include/header.php');
                     <?php while ($arrayCategorie = $afficheAnnonce3->fetch(PDO::FETCH_ASSOC)) : ?>
                         <option value="<?= $arrayCategorie['id_categorie'] ?>" <?php if (isset($_POST['categorie']) && $_POST['categorie'] == $arrayCategorie['id_categorie']) echo "selected" ?>><?= $arrayCategorie['titre']  ?></option>
                     <?php endwhile; ?>
-
+                    <option value=""></option> <!-- Option vide pour réinitialiser le champ -->
                 </select>
+
                 <!-- Region -->
                 <label for="region">Région</label>
                 <select name="region" id="region" class="form-control col-sm-10">
-                    <option value="" disabled selected>Toutes les régions</option>
+                    <option value="" selected>Toutes les régions</option>
                     <?php while ($arrayRegion = $afficheAnnonce4->fetch(PDO::FETCH_ASSOC)) : ?>
                         <option value="<?= $arrayRegion['ville'] ?>"><?= $arrayRegion['ville']  ?></option>
                     <?php endwhile; ?>
@@ -160,15 +161,14 @@ require_once('include/header.php');
                 <!-- Membre -->
                 <label for="membre">Membre</label>
                 <select name="membre" id="membre" class="form-control col-sm-10">
-                    <option value="" disabled selected>Tous les membres</option>
+                    <option value="" selected>Tous les membres</option>
                     <?php while ($arrayMembre = $afficheAnnonce5->fetch(PDO::FETCH_ASSOC)) : ?>
-                        <option value="<?= $arrayMembre['id_membre'] ?>"><?= $arrayMembre['prenom']  ?></option>
+                        <option value="<?= $arrayMembre['id_membre'] ?>"><?= $arrayMembre['nom']  ?></option>
                     <?php endwhile; ?>
                 </select>
                 <!-- Prix -->
                 <div class="row">
                     <div class="col-10">
-
                         <label for="customRange">Prix</label>
                         <input type="range" name="prix" class="custom-range" min="0" max="10000" step="10" value="0" id="customRange">
                         <p>Prix: <span id="prix"></span> €</p>
@@ -187,7 +187,10 @@ require_once('include/header.php');
 
             <!-- Annonces -->
             <div class="  col-sm-6 col-12">
+            </div>
+        </div>
     </form>
+
 
 <?php endif; ?>
 
@@ -297,26 +300,28 @@ while ($arrayAnnonce = $afficheAnnonce->fetch(PDO::FETCH_ASSOC)) :
         </a>
     </div>
 <?php endwhile;   ?>
-<!-- Debut de pagignation -->
+<!-- PAGINATION BOT TAB-->
 <nav>
     <ul class="pagination justify-content-end">
-
-        <li class="page-item <?= ($pageCourante == 1) ? 'disabled' : "" ?>">
-
+        <!-- Dans le cas ou nous sommes sur la page 1, ternaire pour ajouter la class Bootstrap 'disabled' afin de désactiver le bouton précédent car il n'y a pas de page précédente à la 1ere  -->
+        <li class="page-item <?= ($pageCourante == 1) ? 'disabled': "" ?>">
+        <!-- Si on clique sur la flêche précédente, c'est pour aller à la page précédent, dans ce cas on soustrait à $pageCourante, la valeur de 1 (si pageCourante = 4, on retournera à la page 3) -->
             <a class="page-link text-dark" href="?page=<?= $pageCourante - 1 ?>" aria-label="Previous">
                 <span aria-hidden="true">précédente</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
-        <!-- AFFICHE LE NOMBRE DE PAGES -->
-        <?php for ($page = 1; $page <= $nombresPages; $page++) : ?>
-            <li class="mx-1 page-item <?= ($pageCourante == $page) ? 'active' : "" ?>">
-                <a class="btn btn-outline-dark " href="?page=<?= $page ?>"><?= $page ?></a>
-            </li>
+        
+        <!-- AFFICHAGE DU NOMBRE DE PAGE -->
+        <?php for($page = 1; $page <= $nombresPages; $page++): ?>
+        <li class="mx-1 page-item ">
+            <a class="btn btn-outline-dark <?= ($pageCourante == $page) ? 'active': "" ?>" href="?page=<?= $page?>"><?= $page?></a>
+        </li>
         <?php endfor; ?>
+        <!-- Fin d'affichage nombre de pages -->
 
-        <!-- FIN NOMBRE DE PAGES -->
-        <li class="page-item <?= ($pageCourante == $nombresPages) ? 'disabled' : '' ?>">
+
+        <li class="page-item <?= ($pageCourante == $nombresPages) ? 'disabled': "" ?>">
             <a class="page-link text-dark" href="?page=<?= $pageCourante + 1 ?>" aria-label="Next">
                 <span aria-hidden="true">suivante</span>
                 <span class="sr-only">Next</span>
@@ -324,5 +329,6 @@ while ($arrayAnnonce = $afficheAnnonce->fetch(PDO::FETCH_ASSOC)) :
         </li>
     </ul>
 </nav>
+<!-- PAGINATION FIN BOT TAB-->
 
 <?php require_once('include/footer.php') ?>

@@ -43,7 +43,6 @@ require_once('include/header.php');
             <div class="row justify-content-center">
             
                 <div class="col-md-8 text-center">
-                <a href=""><button class="btn btn-success">ENTREZ</button></a>
                     <h1 class="display-4">Bienvenue sur Annonceo !</h1>
                     <p class="lead">Nous sommes ravis de vous accueillir dans notre boutique en ligne où vous trouverez une large sélection de produits de qualité à des prix compétitifs. Que vous cherchiez des vêtements tendance, des accessoires de mode, des produits de beauté, des articles de maison ou des cadeaux pour vos proches, nous avons ce qu'il vous faut.</p>
                     <p>Notre équipe travaille dur pour vous offrir une expérience de shopping en ligne simple et agréable, avec des livraisons rapides et fiables, un service clientèle exceptionnel et des offres spéciales tout au long de l'année. N'hésitez pas à explorer notre site et à nous contacter si vous avez des questions. Merci de votre visite et à bientôt sur Annonceo !</p>

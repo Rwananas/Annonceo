@@ -44,7 +44,6 @@ if (isset($_GET['action'])) {
                 $inscrireUser->bindValue(':id_commentaire', $_POST['id_commentaire'], PDO::PARAM_STR);
                 $inscrireUser->bindValue(':membre_id', $_POST['membre_id'], PDO::PARAM_STR);
                 $inscrireUser->bindValue(':annonce_id', $_POST['annonce_id'], PDO::PARAM_STR);
-                $inscrireUser->bindValue(':commentaire', $_POST['commentaire'], PDO::PARAM_INT);
                 $inscrireUser->execute();
             }
         }
