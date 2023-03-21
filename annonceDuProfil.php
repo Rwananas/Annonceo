@@ -18,7 +18,7 @@ if ($annonce['membre_id'] != $_SESSION['membre']['id_membre']) {
 // Traitement du formulaire de modification
 if (isset($_GET['action']) && $_GET['action'] == 'update') {
     if ($_GET['action'] == 'update') {
-        $tousAnnonces = $pdo->query("SELECT * FROM Annonce WHERE id_annonce = '{$_GET['id_annonce']}' ");
+        $tousAnnonces = $pdo->query("SELECT * FROM annonce WHERE id_annonce = '{$_GET['id_annonce']}' ");
         $currentAnnonce = $tousAnnonces->fetch(PDO::FETCH_ASSOC);
     }
 

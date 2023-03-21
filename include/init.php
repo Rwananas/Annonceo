@@ -21,6 +21,11 @@ $validate = "";
 $validate_index = "";
 $content = "";
 
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'Annonceo';
+
 // protection des formulaires avec une foreach additionnée avec htmlspecialchars
 foreach($_POST as $key => $value){
     // on ajoute trim pour des gains en espace mémoire
