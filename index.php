@@ -10,12 +10,12 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
 } else {
     $pageCourante = 1;
 }
-$queryAnnonces = $pdo->query(" SELECT COUNT(id_annonce) AS nombreAnnonces FROM Annonce ");
-$resultatAnnonces = $queryAnnonces->fetch();
-$nombreAnnonces = (int) $resultatAnnonces['nombreAnnonces'];
-$parPage = 6;
-$nombresPages = ceil($nombreAnnonces / $parPage);
-$premierAnnonce = ($pageCourante - 1) * $parPage;
+// $queryAnnonces = $pdo->query(" SELECT COUNT(id_annonce) AS nombreAnnonces FROM annonce ");
+// $resultatAnnonces = $queryAnnonces->fetch();
+// $nombreAnnonces = (int) $resultatAnnonces['nombreAnnonces'];
+// $parPage = 6;
+// $nombresPages = ceil($nombreAnnonces / $parPage);
+// $premierAnnonce = ($pageCourante - 1) * $parPage;
 
 // FIN PAGINATION GESTION ANNONCES
 

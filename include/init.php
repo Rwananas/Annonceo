@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // dans ce fichier init, on va coder tout ce qui va nous servir sur l'intégralité des fichiers de notre boutique
 
 // connexion à la bdd
