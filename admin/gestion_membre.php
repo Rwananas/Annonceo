@@ -93,7 +93,7 @@ if (isset($_GET['action'])) {
                 $modifUser->bindValue(':pseudo', $_POST['pseudo'], PDO::PARAM_STR);
                 $modifUser->bindValue(':nom', $_POST['nom'], PDO::PARAM_STR);
                 $modifUser->bindValue(':prenom', $_POST['prenom'], PDO::PARAM_STR);
-                $modifUser->bindValue(':telephone', $_POST['telephone'], PDO::PARAM_INT);
+                $modifUser->bindValue(':telephone', $_POST['telephone'], PDO::PARAM_STR);
                 $modifUser->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
                 $modifUser->bindValue(':civilite', $_POST['civilite'], PDO::PARAM_STR);
                 

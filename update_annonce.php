@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // traitement de l'image si elle a été téléchargée
     if (!empty($_FILES['photo']['name'])) {
         $photo = $_FILES['photo']['name'];
-        move_uploaded_file($_FILES['photo']['tmp_name'], 'chemin_vers_dossier/' . $photo);
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'img/' . $photo);
     } else {
         $photo = null;
     }
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindValue(':id_annonce', $id_annonce);
     $stmt->execute();
 
-    // redirection vers la page de détails de l'annonce mise à jour
+    // redirection vers la page de détails de l'annonce à jour
     header('Location: ' . URL . 'fiche_annonceModif.php?id=' . $id_annonce);
     exit();
 } else {

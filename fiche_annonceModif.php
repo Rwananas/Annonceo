@@ -4,10 +4,10 @@ require_once('include/init.php');
 // RECUPERATION DES COMMENTAIRES ET NOTES
 // Connexion à la base de données
 // Vérification de la connexion
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "annonceo";
+// $servername = 'db5012372986.hosting-data.io';
+// $username = 'dbu2805641';
+// $password = 'Erw4nnIonos!';
+// $dbname = 'dbs10405494';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -66,10 +66,10 @@ if (!empty($_GET['id_annonce'])) {
 
         $infos_photos_annexes = $liste_photos_annexes->fetch(PDO::FETCH_ASSOC);
     } else {
-        header('location:index.php');
+        header('location: ' . URL . 'index.php');
     }
 } else {
-    header('location:index.php');
+    header('location: ' . URL . 'index.php');
 }
 
 
@@ -120,19 +120,8 @@ require_once('include/header.php');
                     <a href="<?= URL ?>modifier_annonce.php?id=<?= $detail['id_annonce'] ?>" class="btn btn-sm btn-primary">Ajouter au panier</a>
                 </div>
             </div>
-            <!-- <form method="post">
-                <div class="form-group">
-                    <label for="comment">Commentaire:</label>
-                    <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="rating">Note:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" min="1" max="5">
-                </div>
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-            </form> -->
-
-
+            
+            <!-- FORMULAIRE POUR LAISSER UN COMMENTAIRE -->
             <form method="post" action="script.php">
                 <div class="form-group">
                     <label for="commentaire">Commentaire :</label>
@@ -148,6 +137,6 @@ require_once('include/header.php');
 
 
 
-<div class="container">
+
 
     <?php require_once('include/footer.php') ?>

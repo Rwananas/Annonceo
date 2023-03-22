@@ -3,7 +3,8 @@
 // dans ce fichier init, on va coder tout ce qui va nous servir sur l'intégralité des fichiers de notre boutique
 
 // connexion à la bdd
-$pdo = new PDO('mysql:host=localhost;dbname=annonceo', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8') );
+// $pdo = new PDO('mysql:host=localhost;dbname=annonceo', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8') );
+$pdo = new PDO('mysql:host=db5012372986.hosting-data.io;dbname=dbs10405494; charset=utf8', 'dbu2805641', 'Erw4nnIonos!', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8') );
 
 // le session_start obligatoire en haut de chaque fichier
 session_start();
@@ -13,7 +14,8 @@ session_start();
 define('RACINE_SITE', $_SERVER['DOCUMENT_ROOT'] .'/annonceo/' );
 
 // constante URL pour notre projet (a modifier avec le nom de domaine plus tard lorsque le site sera hébergé, mis en ligne)
-define('URL', 'http://localhost/annonceo/');
+// define('URL', 'http://localhost/annonceo/');
+define('URL', 'https://dwrone.com/annonceo/');
 
 // initialisation de qlq variables utiles sur tout le site
 $erreur = "";
@@ -22,10 +24,10 @@ $validate = "";
 $validate_index = "";
 $content = "";
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'Annonceo';
+$servername = 'db5012372986.hosting-data.io';
+$username = 'dbu2805641';
+$password = 'Erw4nnIonos!';
+$dbname = 'dbs10405494';
 
 // protection des formulaires avec une foreach additionnée avec htmlspecialchars
 foreach($_POST as $key => $value){

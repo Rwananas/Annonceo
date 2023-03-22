@@ -68,7 +68,7 @@ require_once('include/header.php');
             <div class="row justify-content-around text-center">
                 <?php while ($annonce = $afficheAnnonces->fetch(PDO::FETCH_ASSOC)) : ?>
                     <div class="card mx-3 shadow p-3 mb-5 bg-white rounded">
-                        <a href="fiche_annonceModif.php?id_annonce= <?= $annonce['id_annonce'] ?>"><img src="<?= URL . 'img/' . $annonce['photo'] ?>" class="card-img-top" alt="Photo de <?= $annonce['titre'] ?>"></a>
+                        <a href="<?= URL ?>fiche_annonceModif.php?id_annonce= <?= $annonce['id_annonce'] ?>"><img src="<?= URL . 'img/' . $annonce['photo'] ?>" class="card-img-top" alt="Photo de <?= $annonce['titre'] ?>"></a>
                         <div class="card-body">
                             <h3 class="card-title"><?= $annonce['titre'] ?></h3>
                             <h3 class="card-title">
@@ -245,8 +245,8 @@ $condition = "";
 if (!empty($toutesAnnonces)) {
     $condition = ' AND ';
 }
-$allAnonnonces = 'SELECT * FROM annonce WHERE 1 ' . $condition . implode(' AND ', $toutesAnnonces) . $add;
-$afficheAnnonce = $pdo->query($allAnonnonces);
+$allAnnonces = 'SELECT * FROM annonce WHERE 1 ' . $condition . implode(' AND ', $toutesAnnonces) . $add;
+$afficheAnnonce = $pdo->query($allAnnonces);
 ?>
 
 <?php

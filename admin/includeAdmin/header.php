@@ -5,10 +5,13 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Nous sommes ravis de vous accueillir dans notre boutique en ligne où vous trouverez une large sélection de produits de qualité à des prix compétitifs. Que vous cherchiez des vêtements tendance, des accessoires de mode, des produits de beauté, des articles de maison ou des cadeaux pour vos proches, nous avons ce qu'il vous faut.">
+  <meta name="author" content="Bruneteau Erwann">
 
   <title>Annonceo</title>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="../img/logoAnnonceo.png" />
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

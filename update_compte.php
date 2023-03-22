@@ -13,7 +13,7 @@ $new_email = $_POST['new_email'];
 $new_telephone = $_POST['new_telephone'];
 
 // Mise à jour des données dans la base de données
-$stmt = $pdo->prepare("UPDATE membre SET pseudo=:pseudo, prenom=:prenom, nom=:nom, email=:email, telephone=:telephone WHERE id_membre=:id_membre");
+$stmt = $pdo->prepare("UPDATE membre SET pseudo=:pseudo, prenom=:prenom, nom=:nom, email=:email, telephone=:telephone, id_membre=:id_membre WHERE id_membre=:id_membre");
 $stmt->bindValue(':pseudo', $new_pseudo, PDO::PARAM_STR);
 $stmt->bindValue(':prenom', $new_prenom, PDO::PARAM_STR);
 $stmt->bindValue(':nom', $new_nom, PDO::PARAM_STR);
@@ -30,6 +30,6 @@ $_SESSION['membre']['email'] = $new_email;
 $_SESSION['membre']['telephone'] = $new_telephone;
 
 // Redirection vers la page de profil
-header("Location: " . URL . 'profil.php');
+header("Location: " . URL . "profil.php");
 exit();
 ?>
